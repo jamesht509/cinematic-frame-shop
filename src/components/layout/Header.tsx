@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Menu, X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCart } from '@/contexts/CartContext';
+import { useCartStore, useCartTotalItems } from '@/stores/cartStore';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -16,7 +16,8 @@ const navLinks = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { totalItems, openCart } = useCart();
+  const totalItems = useCartTotalItems();
+  const openCart = useCartStore((state) => state.openCart);
 
   useEffect(() => {
     const handleScroll = () => {
