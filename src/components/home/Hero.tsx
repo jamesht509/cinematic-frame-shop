@@ -111,7 +111,7 @@ export function Hero() {
                 {/* Description */}
                 <p 
                   className={cn(
-                    "text-white text-lg md:text-xl lg:text-2xl mb-6 leading-relaxed max-w-2xl font-medium transition-all duration-700",
+                    "text-white text-lg md:text-xl lg:text-2xl mb-6 leading-relaxed max-w-2xl transition-all duration-700",
                     index === currentSlide && !isAnimating
                       ? "opacity-100 translate-x-0"
                       : slideDirection === 'right'
@@ -126,7 +126,7 @@ export function Hero() {
                 {/* CTA Text */}
                 <p 
                   className={cn(
-                    "text-white font-semibold text-base md:text-lg mb-10 transition-all duration-700",
+                    "text-white font-bold text-base md:text-lg mb-10 transition-all duration-700",
                     index === currentSlide && !isAnimating
                       ? "opacity-100 translate-x-0"
                       : slideDirection === 'right'
