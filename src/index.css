@@ -135,9 +135,10 @@
            transition-all duration-300 font-semibold tracking-wide uppercase text-sm;
   }
 
-  /* Legacy support */
+  /* Gold button - solid gold background */
   .btn-gold {
-    @apply btn-red;
+    @apply bg-[hsl(var(--gold))] text-[hsl(var(--charcoal))] hover:bg-[hsl(var(--gold-hover))] 
+           transition-all duration-300 font-semibold tracking-wide uppercase text-sm;
   }
 
   /* Section backgrounds */
