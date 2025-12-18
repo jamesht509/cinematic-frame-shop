@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, Play } from 'lucide-react';
 
 const features = [
   'Stunning skin tones that glow',
@@ -12,13 +12,23 @@ export function SplitBanner() {
   return (
     <section className="bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        {/* Left - Image */}
-        <div className="aspect-[4/5] lg:aspect-auto relative overflow-hidden">
+        {/* Left - Video Placeholder */}
+        <div className="aspect-[4/5] lg:aspect-auto relative overflow-hidden bg-charcoal-dark group cursor-pointer">
           <img
             src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=800&auto=format&fit=crop"
-            alt="Maternity photography"
-            className="w-full h-full object-cover"
+            alt="Video thumbnail"
+            className="w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-300"
           />
+          {/* Play Button Overlay */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-20 h-20 md:w-24 md:h-24 bg-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <Play className="w-8 h-8 md:w-10 md:h-10 text-white fill-white ml-1" />
+            </div>
+          </div>
+          {/* Video Label */}
+          <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-black/60 text-white text-sm font-medium">
+            Watch Tutorial
+          </div>
         </div>
 
         {/* Right - Content */}
