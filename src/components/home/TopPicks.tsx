@@ -16,59 +16,59 @@ interface TopPickProduct {
 
 const topPicks: TopPickProduct[] = [
   {
-    id: 'christmas-magic',
-    title: 'Christmas Magic Photoshop Actions',
+    id: 'winter-wonderland',
+    title: 'Winter Wonderland Editing Suite',
     category: 'PHOTOSHOP ACTIONS',
-    price: 103,
-    originalPrice: 204,
+    price: 89,
+    originalPrice: 178,
     discount: '50%OFF',
     image: 'https://images.unsplash.com/photo-1512389142860-9c449e58a814?w=400&h=500&fit=crop',
     rating: 5,
-    reviews: 24,
+    reviews: 147,
   },
   {
-    id: 'snow-globe-bundle',
-    title: 'Snow Globe Digital Background BUNDLE',
-    category: 'DIGITAL BACKGROUNDS',
-    price: 73,
-    originalPrice: 146,
+    id: 'festive-bokeh-bundle',
+    title: 'Festive Bokeh Overlay Collection',
+    category: 'DIGITAL OVERLAYS',
+    price: 67,
+    originalPrice: 134,
     discount: '50%OFF',
     image: 'https://images.unsplash.com/photo-1482517967863-00e15c9b44be?w=400&h=500&fit=crop',
     rating: 5,
-    reviews: 52,
+    reviews: 89,
   },
   {
-    id: 'fur-babies',
-    title: 'Fur Babies - Photoshop Actions',
+    id: 'pet-portrait-pro',
+    title: 'Pet Portrait Pro Actions',
     category: 'PHOTOSHOP ACTIONS',
-    price: 95,
-    originalPrice: 190,
+    price: 79,
+    originalPrice: 158,
     discount: '50%OFF',
     image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=500&fit=crop',
     rating: 5,
-    reviews: 233,
+    reviews: 312,
   },
   {
-    id: 'hallmark-presets',
-    title: 'Evoto Hallmark Christmas Presets',
-    category: 'EVOTO PRESETS',
-    price: 53,
-    originalPrice: 105,
+    id: 'golden-hour-presets',
+    title: 'Golden Hour Portrait Presets',
+    category: 'LIGHTROOM PRESETS',
+    price: 59,
+    originalPrice: 118,
     discount: '50%OFF',
     image: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&h=500&fit=crop',
     rating: 5,
-    reviews: 8,
+    reviews: 203,
   },
   {
-    id: 'holiday-glow',
-    title: 'Holiday Glow Lightroom Presets',
-    category: 'LIGHTROOM PRESETS',
-    price: 46,
-    originalPrice: 92,
+    id: 'cozy-christmas-pack',
+    title: 'Cozy Christmas Editing Pack',
+    category: 'COMPLETE BUNDLE',
+    price: 99,
+    originalPrice: 198,
     discount: '50%OFF',
     image: 'https://images.unsplash.com/photo-1545048702-79362596cdc9?w=400&h=500&fit=crop',
     rating: 4.5,
-    reviews: 6,
+    reviews: 76,
   },
 ];
 
@@ -108,17 +108,17 @@ export function TopPicks() {
         {/* Header */}
         <header className="text-center mb-8">
           <h2 id="top-picks-heading" className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-charcoal mb-3">
-            Photographers' top picks
+            Best-Selling Photo Editing Tools
           </h2>
           <p className="text-charcoal uppercase tracking-wider text-sm font-semibold mb-4">
-            THE EDITING TOOLS LOVED BY OUR COMMUNITY AT THE BIGGEST SAVING EVER RIGHT NOW
+            PROFESSIONAL PRESETS AND ACTIONS CHOSEN BY THOUSANDS OF PHOTOGRAPHERS WORLDWIDE
           </p>
           <div className="flex items-center justify-center gap-1">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-4 h-4 fill-charcoal text-charcoal" />
             ))}
             <span className="text-muted-foreground text-sm ml-2">
-              Trusted by 45,000+ professional photographers worldwide
+              Loved by 50,000+ creative professionals globally
             </span>
           </div>
         </header>
