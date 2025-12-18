@@ -3,25 +3,25 @@ import { cn } from '@/lib/utils';
 
 const galleryImages = [
   {
-    src: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop',
-    alt: 'Wedding portrait',
+    src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=1000&fit=crop',
+    alt: 'Wedding portrait photography',
     large: true,
   },
   {
-    src: 'https://images.unsplash.com/photo-1544126592-807ade215a0b?q=80&w=400&auto=format&fit=crop',
-    alt: 'Newborn photography',
+    src: 'https://images.unsplash.com/photo-1544126592-807ade215a0b?w=400&h=400&fit=crop',
+    alt: 'Newborn photography session',
   },
   {
-    src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=400&auto=format&fit=crop',
-    alt: 'Portrait session',
+    src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=400&fit=crop',
+    alt: 'Portrait photography session',
   },
   {
-    src: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=400&auto=format&fit=crop',
-    alt: 'Maternity shoot',
+    src: 'https://images.unsplash.com/photo-1623091411395-09e79fdbfcf3?w=400&h=400&fit=crop',
+    alt: 'Maternity photo shoot',
   },
   {
-    src: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=400&auto=format&fit=crop',
-    alt: 'Pet photography',
+    src: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop',
+    alt: 'Pet photography session',
   },
 ];
 
