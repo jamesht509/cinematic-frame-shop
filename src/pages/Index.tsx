@@ -4,13 +4,13 @@ import { TrustStrip } from '@/components/home/TrustStrip';
 import { TopPicks } from '@/components/home/TopPicks';
 import { MasonryGallery } from '@/components/home/MasonryGallery';
 import { SplitBanner } from '@/components/home/SplitBanner';
-import { CategoryGrid } from '@/components/home/CategoryGrid';
+import { TransformationShowcase } from '@/components/home/TransformationShowcase';
 import { FounderSection } from '@/components/home/FounderSection';
 
 const Index = () => {
   return (
     <Layout>
-      {/* 1. Hero - Magazine Cover with Image Background */}
+      {/* 1. Hero - Full Width Magazine Cover */}
       <Hero />
       
       {/* 2. Trust Strip - Dark Grey with Icons */}
@@ -25,8 +25,8 @@ const Index = () => {
       {/* 5. Split Banner - 50/50 Layout */}
       <SplitBanner />
       
-      {/* 6. Category Navigator - Dark Charcoal 3x3 Grid */}
-      <CategoryGrid />
+      {/* 6. Before/After Slider Grid - Dark Background */}
+      <TransformationShowcase />
       
       {/* 7. Founder Section - Black with Circular Portrait */}
       <FounderSection />
