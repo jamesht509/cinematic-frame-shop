@@ -49,7 +49,7 @@ export function TransformationShowcase() {
         </div>
 
         {/* 3-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {transformations.map((item, index) => (
             <div key={index} className="group">
               <BeforeAfterSlider
@@ -57,7 +57,7 @@ export function TransformationShowcase() {
                 afterImage={item.afterImage}
                 beforeLabel="Original"
                 afterLabel="Edited"
-                className="aspect-[4/3]"
+                className="aspect-[3/4]"
               />
               <h3 className="text-white font-serif text-xl mt-4 text-center group-hover:text-gold transition-colors">
                 {item.title}

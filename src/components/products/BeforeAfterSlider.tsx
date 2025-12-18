@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface BeforeAfterSliderProps {
@@ -17,7 +17,7 @@ export function BeforeAfterSlider({
   className,
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleMove = (clientX: number) => {
@@ -28,44 +28,27 @@ export function BeforeAfterSlider({
     setSliderPosition(percentage);
   };
 
-  const handleMouseDown = () => setIsDragging(true);
-  const handleMouseUp = () => setIsDragging(false);
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging) return;
-    handleMove(e.clientX);
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isHovering) {
+      handleMove(e.clientX);
+    }
   };
 
-  const handleTouchMove = (e: TouchEvent) => {
-    if (!isDragging) return;
+  const handleTouchMove = (e: React.TouchEvent) => {
     handleMove(e.touches[0].clientX);
   };
-
-  useEffect(() => {
-    if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-      window.addEventListener('touchmove', handleTouchMove);
-      window.addEventListener('touchend', handleMouseUp);
-    }
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleMouseUp);
-    };
-  }, [isDragging]);
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        'relative aspect-[4/3] md:aspect-[16/10] rounded-lg overflow-hidden cursor-ew-resize select-none',
+        'relative aspect-[4/3] md:aspect-[16/10] overflow-hidden cursor-ew-resize select-none',
         className
       )}
-      onMouseDown={handleMouseDown}
-      onTouchStart={handleMouseDown}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+      onMouseMove={handleMouseMove}
+      onTouchMove={handleTouchMove}
     >
       {/* After Image (Full) */}
       <img
@@ -90,7 +73,7 @@ export function BeforeAfterSlider({
 
       {/* Slider Line */}
       <div
-        className="absolute top-0 bottom-0 w-0.5 bg-foreground z-10 pointer-events-none"
+        className="absolute top-0 bottom-0 w-0.5 bg-foreground z-10 pointer-events-none transition-all duration-75"
         style={{ left: `${sliderPosition}%` }}
       >
         {/* Handle */}
@@ -103,10 +86,10 @@ export function BeforeAfterSlider({
       </div>
 
       {/* Labels */}
-      <div className="absolute top-4 left-4 px-3 py-1.5 rounded bg-background/80 backdrop-blur-sm text-sm font-medium">
+      <div className="absolute top-4 left-4 px-3 py-1.5 bg-background/80 backdrop-blur-sm text-sm font-medium">
         {beforeLabel}
       </div>
-      <div className="absolute top-4 right-4 px-3 py-1.5 rounded bg-primary/90 backdrop-blur-sm text-primary-foreground text-sm font-medium">
+      <div className="absolute top-4 right-4 px-3 py-1.5 bg-primary/90 backdrop-blur-sm text-primary-foreground text-sm font-medium">
         {afterLabel}
       </div>
     </div>
