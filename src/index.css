@@ -1,82 +1,90 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Photography E-Commerce Design System
-   Dark Cinematic Theme with Gold Accents
-   All colors are HSL
+/* Editorial Magazine Design System
+   Rich Photography Store - Vogue/Harper's Bazaar Style
+   Alternating Backgrounds with Red/Gold Accents
 */
 
 @layer base {
   :root {
-    /* Dark cinematic background - #101010 */
-    --background: 0 0% 6%;
-    /* Off-white text - #F5F5F5 */
-    --foreground: 0 0% 96%;
+    /* Light section backgrounds */
+    --background: 0 0% 100%;
+    --background-light: 40 20% 97%;
+    --background-warm: 35 25% 95%;
+    --background-dark: 0 0% 10%;
+    --background-charcoal: 0 0% 6%;
+    
+    /* Text colors */
+    --foreground: 0 0% 5%;
+    --foreground-light: 0 0% 96%;
 
-    /* Cards slightly lighter than background */
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 96%;
+    /* Cards */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 96%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
 
-    /* Primary - Muted Gold - #C5A059 */
-    --primary: 42 52% 56%;
-    --primary-foreground: 0 0% 6%;
+    /* Primary - Deep Christmas Red #780000 */
+    --primary: 0 100% 24%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Darker surface */
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 96%;
+    /* Secondary */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
 
-    /* Muted text and surfaces */
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    /* Muted */
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 45%;
 
-    /* Accent - Gold variant */
-    --accent: 42 45% 45%;
-    --accent-foreground: 0 0% 96%;
+    /* Accent - Metallic Gold #C5A059 */
+    --accent: 42 52% 56%;
+    --accent-foreground: 0 0% 5%;
 
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 15%;
-    --ring: 42 52% 56%;
+    --border: 0 0% 88%;
+    --input: 0 0% 90%;
+    --ring: 0 100% 24%;
 
-    --radius: 0.25rem;
+    /* Sharp corners - 0px border radius */
+    --radius: 0px;
 
     /* Custom tokens */
     --gold: 42 52% 56%;
     --gold-hover: 42 55% 48%;
     --gold-glow: 42 60% 65%;
-    --charcoal: 0 0% 6%;
-    --charcoal-light: 0 0% 12%;
-    --cream: 0 0% 96%;
-    --cream-muted: 0 0% 75%;
+    --charcoal: 0 0% 10%;
+    --charcoal-dark: 0 0% 6%;
+    --cream: 40 20% 97%;
+    --cream-warm: 35 25% 95%;
+    --red-deep: 0 100% 24%;
 
     /* Typography */
-    --font-serif: 'Cormorant Garamond', Georgia, serif;
-    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Lato', system-ui, sans-serif;
 
     /* Transitions */
     --transition-fast: 150ms ease;
     --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Shadows */
-    --shadow-sm: 0 2px 8px hsl(0 0% 0% / 0.3);
-    --shadow-md: 0 4px 16px hsl(0 0% 0% / 0.4);
-    --shadow-lg: 0 8px 32px hsl(0 0% 0% / 0.5);
-    --shadow-gold: 0 4px 20px hsl(42 52% 56% / 0.25);
+    /* No shadows for flat luxury look */
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --shadow-gold: none;
 
     /* Sidebar */
     --sidebar-background: 0 0% 8%;
     --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 42 52% 56%;
-    --sidebar-primary-foreground: 0 0% 6%;
+    --sidebar-primary: 0 100% 24%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 0 0% 12%;
     --sidebar-accent-foreground: 0 0% 96%;
     --sidebar-border: 0 0% 18%;
@@ -100,7 +108,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
-    @apply font-medium tracking-tight;
+    @apply font-bold tracking-tight;
   }
 }
 
@@ -109,27 +117,59 @@
     @apply w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  /* Gold text gradient */
   .text-gradient-gold {
-    @apply bg-gradient-to-r from-[hsl(var(--gold))] via-[hsl(42,60%,70%)] to-[hsl(var(--gold))] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[hsl(var(--gold))] via-[hsl(42,60%,65%)] to-[hsl(var(--gold))] bg-clip-text text-transparent;
   }
 
-  .btn-gold {
-    @apply bg-primary text-primary-foreground hover:bg-[hsl(var(--gold-hover))] 
-           transition-all duration-300 font-medium tracking-wide
-           shadow-[var(--shadow-gold)] hover:shadow-[0_6px_24px_hsl(42_52%_56%_/_0.35)];
+  /* Primary red button - sharp corners */
+  .btn-red {
+    @apply bg-primary text-primary-foreground hover:bg-[hsl(0,100%,20%)] 
+           transition-all duration-300 font-semibold tracking-wide uppercase text-sm;
   }
 
+  /* Gold outline button - sharp corners */
   .btn-outline-gold {
-    @apply border border-primary text-primary hover:bg-primary hover:text-primary-foreground
-           transition-all duration-300 font-medium tracking-wide;
+    @apply border-2 border-[hsl(var(--gold))] text-[hsl(var(--gold))] bg-transparent
+           hover:bg-[hsl(var(--gold))] hover:text-[hsl(var(--charcoal))]
+           transition-all duration-300 font-semibold tracking-wide uppercase text-sm;
   }
 
+  /* Legacy support */
+  .btn-gold {
+    @apply btn-red;
+  }
+
+  /* Section backgrounds */
+  .bg-section-light {
+    @apply bg-[hsl(var(--background))];
+  }
+
+  .bg-section-warm {
+    @apply bg-[hsl(var(--cream-warm))];
+  }
+
+  .bg-section-dark {
+    @apply bg-[hsl(var(--charcoal))] text-[hsl(var(--foreground-light))];
+  }
+
+  .bg-section-charcoal {
+    @apply bg-[hsl(var(--charcoal-dark))] text-[hsl(var(--foreground-light))];
+  }
+
+  /* Card hover without shadow */
   .card-hover {
-    @apply transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg;
+    @apply transition-all duration-300 hover:translate-y-[-4px];
   }
 
+  /* Image overlay */
   .image-overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent;
+    @apply absolute inset-0 bg-gradient-to-t from-[hsl(var(--charcoal-dark)/0.8)] via-transparent to-transparent;
+  }
+
+  /* Announcement bar */
+  .announcement-bar {
+    @apply bg-primary text-primary-foreground py-2 text-center text-sm font-semibold tracking-wider uppercase;
   }
 }
 

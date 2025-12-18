@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Menu, X, Search } from 'lucide-react';
+import { ShoppingBag, Menu, X, Search, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore, useCartTotalItems } from '@/stores/cartStore';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
-  { label: 'Shop All', href: '/shop' },
-  { label: 'Presets', href: '/collections/presets' },
-  { label: 'Actions', href: '/collections/actions' },
-  { label: 'Bundles', href: '/collections/bundles' },
-  { label: 'About', href: '/about' },
+  { label: 'SHOP ALL', href: '/shop' },
+  { label: 'PRESETS', href: '/collections/presets' },
+  { label: 'ACTIONS', href: '/collections/actions' },
+  { label: 'BUNDLES', href: '/collections/bundles' },
+  { label: 'ABOUT', href: '/about' },
 ];
 
 export function Header() {
@@ -28,85 +28,93 @@ export function Header() {
   }, []);
 
   return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled
-          ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-sm'
-          : 'bg-transparent'
-      )}
-    >
-      <div className="container-wide">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-foreground"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
-
-          {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
-            <h1 className="text-xl md:text-2xl font-serif font-semibold tracking-wide text-foreground">
-              LUMIÈRE
-            </h1>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 tracking-wide uppercase"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Actions */}
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="text-foreground hidden md:flex">
-              <Search className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-foreground relative"
-              onClick={openCart}
-            >
-              <ShoppingBag className="h-5 w-5" />
-              {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs font-medium flex items-center justify-center">
-                  {totalItems}
-                </span>
-              )}
-            </Button>
-          </div>
-        </div>
+    <>
+      {/* Announcement Bar */}
+      <div className="announcement-bar">
+        <span>✨ It's Magic Season! 50% OFF Bundles ✨</span>
       </div>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-background border-t border-border animate-fade-in">
-          <nav className="container-wide py-6 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
+      {/* Main Header */}
+      <header
+        className={cn(
+          'sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-charcoal-dark border-b border-charcoal'
+        )}
+      >
+        <div className="container-wide">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Logo - Left */}
+            <Link to="/" className="flex-shrink-0">
+              <h1 className="text-xl md:text-2xl font-serif font-bold tracking-wider text-white">
+                LUMIÈRE
+              </h1>
+            </Link>
+
+            {/* Desktop Navigation - Center */}
+            <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-sm font-semibold text-white/80 hover:text-gold transition-colors duration-200 tracking-widest"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Actions - Right */}
+            <div className="flex items-center gap-1">
+              <Button variant="ghost" size="icon" className="text-white hover:text-gold hidden md:flex">
+                <Search className="h-5 w-5" />
+              </Button>
+              <Button variant="ghost" size="icon" className="text-white hover:text-gold hidden md:flex">
+                <User className="h-5 w-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:text-gold relative"
+                onClick={openCart}
               >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+                <ShoppingBag className="h-5 w-5" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </Button>
+
+              {/* Mobile Menu Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden text-white"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </Button>
+            </div>
+          </div>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden bg-charcoal-dark border-t border-charcoal animate-fade-in">
+            <nav className="container-wide py-6 flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-base font-semibold text-white/80 hover:text-gold transition-colors py-2 tracking-widest"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
+      </header>
+    </>
   );
 }
