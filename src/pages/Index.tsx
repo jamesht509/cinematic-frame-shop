@@ -1,13 +1,24 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Layout } from '@/components/layout/Layout';
+import { Hero } from '@/components/home/Hero';
+import { NicheGrid } from '@/components/home/NicheGrid';
+import { TransformationShowcase } from '@/components/home/TransformationShowcase';
+import { ProductGrid } from '@/components/products/ProductGrid';
+import { TestimonialCarousel } from '@/components/home/TestimonialCarousel';
+import { FounderSection } from '@/components/home/FounderSection';
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <Layout>
+      <Hero />
+      <NicheGrid />
+      <TransformationShowcase />
+      <ProductGrid 
+        title="Featured Products"
+        subtitle="Our most popular presets, loved by photographers worldwide."
+      />
+      <TestimonialCarousel />
+      <FounderSection />
+    </Layout>
   );
 };
 
