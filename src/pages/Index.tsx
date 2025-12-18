@@ -6,6 +6,7 @@ import { MasonryGallery } from '@/components/home/MasonryGallery';
 import { SplitBanner } from '@/components/home/SplitBanner';
 import { CustomerTestimonials } from '@/components/home/CustomerTestimonials';
 import { TransformationShowcase } from '@/components/home/TransformationShowcase';
+import { HolidayGallerySlider } from '@/components/home/HolidayGallerySlider';
 import { FounderSection } from '@/components/home/FounderSection';
 
 const Index = () => {
@@ -32,7 +33,10 @@ const Index = () => {
       {/* 7. Before/After Slider Grid - Dark Background */}
       <TransformationShowcase />
       
-      {/* 8. Founder Section - Black with Circular Portrait */}
+      {/* 8. Holiday Gallery Slider with Hover Effect */}
+      <HolidayGallerySlider />
+      
+      {/* 9. Founder Section - Black with Circular Portrait */}
       <FounderSection />
     </Layout>
   );
