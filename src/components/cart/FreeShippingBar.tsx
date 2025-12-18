@@ -1,11 +1,13 @@
 import { Truck, Check } from 'lucide-react';
-import { useCart } from '@/contexts/CartContext';
+import { useCartSubtotal } from '@/stores/cartStore';
 import { Progress } from '@/components/ui/progress';
 
+const FREE_SHIPPING_THRESHOLD = 99;
+
 export function FreeShippingBar() {
-  const { subtotal, freeShippingThreshold } = useCart();
-  const remaining = freeShippingThreshold - subtotal;
-  const progress = Math.min((subtotal / freeShippingThreshold) * 100, 100);
+  const subtotal = useCartSubtotal();
+  const remaining = FREE_SHIPPING_THRESHOLD - subtotal;
+  const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
   const hasQualified = remaining <= 0;
 
   return (

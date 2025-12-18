@@ -1,18 +1,26 @@
-import { X, Plus, Minus, Trash2 } from 'lucide-react';
+import { X, Plus, Minus, Trash2, ExternalLink, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCart } from '@/contexts/CartContext';
+import { useCartStore, useCartSubtotal } from '@/stores/cartStore';
 import { FreeShippingBar } from './FreeShippingBar';
-import { cn } from '@/lib/utils';
 
 export function CartDrawer() {
   const {
     items,
     isOpen,
-    subtotal,
+    isLoading,
     closeCart,
     updateQuantity,
     removeItem,
-  } = useCart();
+    createCheckout,
+  } = useCartStore();
+  const subtotal = useCartSubtotal();
+
+  const handleCheckout = async () => {
+    const checkoutUrl = await createCheckout();
+    if (checkoutUrl) {
+      window.open(checkoutUrl, '_blank');
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -50,32 +58,34 @@ export function CartDrawer() {
             <ul className="space-y-4">
               {items.map((item) => (
                 <li
-                  key={item.id}
+                  key={item.variantId}
                   className="flex gap-4 p-4 bg-background rounded-lg"
                 >
                   <div className="w-20 h-20 rounded overflow-hidden bg-muted shrink-0">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
+                    {item.product.node.images?.edges?.[0]?.node && (
+                      <img
+                        src={item.product.node.images.edges[0].node.url}
+                        alt={item.product.node.title}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-medium text-foreground truncate">
-                      {item.title}
+                      {item.product.node.title}
                     </h3>
-                    {item.variant && (
-                      <p className="text-sm text-muted-foreground">{item.variant}</p>
+                    {item.variantTitle !== 'Default Title' && (
+                      <p className="text-sm text-muted-foreground">{item.variantTitle}</p>
                     )}
                     <p className="text-primary font-medium mt-1">
-                      ${item.price.toFixed(2)}
+                      {item.price.currencyCode} {parseFloat(item.price.amount).toFixed(2)}
                     </p>
                     <div className="flex items-center gap-2 mt-2">
                       <Button
                         variant="outline"
                         size="icon"
                         className="h-8 w-8"
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
                       >
                         <Minus className="h-3 w-3" />
                       </Button>
@@ -84,7 +94,7 @@ export function CartDrawer() {
                         variant="outline"
                         size="icon"
                         className="h-8 w-8"
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
                       >
                         <Plus className="h-3 w-3" />
                       </Button>
@@ -92,7 +102,7 @@ export function CartDrawer() {
                         variant="ghost"
                         size="icon"
                         className="h-8 w-8 ml-auto text-muted-foreground hover:text-destructive"
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => removeItem(item.variantId)}
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -109,13 +119,29 @@ export function CartDrawer() {
           <div className="border-t border-border p-4 space-y-4">
             <div className="flex items-center justify-between text-lg">
               <span className="font-medium">Subtotal</span>
-              <span className="font-serif font-semibold">${subtotal.toFixed(2)}</span>
+              <span className="font-serif font-semibold">
+                {items[0]?.price.currencyCode || '$'} {subtotal.toFixed(2)}
+              </span>
             </div>
             <p className="text-sm text-muted-foreground">
               Taxes and shipping calculated at checkout
             </p>
-            <Button className="w-full btn-gold py-6 text-base">
-              Checkout
+            <Button 
+              className="w-full btn-gold py-6 text-base" 
+              onClick={handleCheckout}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Creating Checkout...
+                </>
+              ) : (
+                <>
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  Checkout
+                </>
+              )}
             </Button>
           </div>
         )}
