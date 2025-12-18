@@ -59,12 +59,13 @@ export default {
         },
         charcoal: {
           DEFAULT: "hsl(var(--charcoal))",
-          light: "hsl(var(--charcoal-light))",
+          dark: "hsl(var(--charcoal-dark))",
         },
         cream: {
           DEFAULT: "hsl(var(--cream))",
-          muted: "hsl(var(--cream-muted))",
+          warm: "hsl(var(--cream-warm))",
         },
+        "red-deep": "hsl(var(--red-deep))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -82,8 +83,8 @@ export default {
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius))",
+        sm: "calc(var(--radius))",
       },
       keyframes: {
         "accordion-down": {
@@ -117,6 +118,7 @@ export default {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-gold": "linear-gradient(135deg, hsl(var(--gold)), hsl(var(--gold-hover)))",
+        "gradient-red": "linear-gradient(135deg, hsl(var(--primary)), hsl(0 100% 18%))",
       },
     },
   },
