@@ -73,25 +73,19 @@ export function BeforeAfterSlider({
 
       {/* Slider Line */}
       <div
-        className="absolute top-0 bottom-0 w-0.5 bg-foreground z-10 pointer-events-none transition-all duration-75"
+        className="absolute top-0 bottom-0 w-[2px] bg-white/90 z-10 pointer-events-none"
         style={{ left: `${sliderPosition}%` }}
       >
         {/* Handle */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-foreground border-4 border-background flex items-center justify-center shadow-lg">
-          <div className="flex items-center gap-1">
-            <div className="w-0 h-0 border-y-4 border-y-transparent border-r-4 border-r-background" />
-            <div className="w-0 h-0 border-y-4 border-y-transparent border-l-4 border-l-background" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 border-2 border-white flex items-center justify-center">
+          <div className="flex items-center gap-0.5">
+            <div className="w-0 h-0 border-y-[5px] border-y-transparent border-r-[5px] border-r-charcoal" />
+            <div className="w-0 h-0 border-y-[5px] border-y-transparent border-l-[5px] border-l-charcoal" />
           </div>
         </div>
       </div>
 
-      {/* Labels */}
-      <div className="absolute top-4 left-4 px-3 py-1.5 bg-background/80 backdrop-blur-sm text-sm font-medium">
-        {beforeLabel}
-      </div>
-      <div className="absolute top-4 right-4 px-3 py-1.5 bg-primary/90 backdrop-blur-sm text-primary-foreground text-sm font-medium">
-        {afterLabel}
-      </div>
+      {/* Remove labels for cleaner look like reference */}
     </div>
   );
 }
