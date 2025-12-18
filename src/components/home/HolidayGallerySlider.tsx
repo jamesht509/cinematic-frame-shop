@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const galleryItems = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1512909006721-3d6018887383?w=500&h=350&fit=crop',
+    image: 'https://images.unsplash.com/photo-1608096299210-db7e38487075?w=500&h=350&fit=crop',
     quote: 'The glow, light, and magic sparkles are a great way to enhance your images and add that whimsy to your clients galleries while creating rich and timeless photos!',
     author: 'Vanessa K.',
     link: '/shop',
@@ -13,7 +13,7 @@ const galleryItems = [
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1545048702-79362596cdc9?w=500&h=350&fit=crop',
+    image: 'https://images.unsplash.com/photo-1576919228236-a097c32a5cd4?w=500&h=350&fit=crop',
     quote: 'These holiday presets transformed my mini sessions into magical masterpieces. My clients are obsessed with the warm, festive tones!',
     author: 'Michelle R.',
     link: '/shop',
@@ -21,7 +21,7 @@ const galleryItems = [
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1482517967863-00e15c9b44be?w=500&h=350&fit=crop',
+    image: 'https://images.unsplash.com/photo-1512389142860-9c449e58a814?w=500&h=350&fit=crop',
     quote: 'Perfect for creating that cozy Christmas atmosphere. The snow overlays are incredibly realistic and easy to apply.',
     author: 'Sarah T.',
     link: '/shop',
@@ -29,7 +29,7 @@ const galleryItems = [
   },
   {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1576919228236-a097c32a5cd4?w=500&h=350&fit=crop',
+    image: 'https://images.unsplash.com/photo-1606567595334-d39972c85dfd?w=500&h=350&fit=crop',
     quote: 'My favorite editing toolkit for holiday portraits. The skin tones stay natural while adding that magical Christmas glow.',
     author: 'Jennifer L.',
     link: '/shop',
@@ -37,11 +37,27 @@ const galleryItems = [
   },
   {
     id: 5,
-    image: 'https://images.unsplash.com/photo-1543589077-47d81606c1bf?w=500&h=350&fit=crop',
+    image: 'https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=500&h=350&fit=crop',
     quote: 'Stunning results every time! These actions save me hours of editing during the busy holiday season.',
     author: 'Amanda P.',
     link: '/shop',
     linkText: 'Shop Actions',
+  },
+  {
+    id: 6,
+    image: 'https://images.unsplash.com/photo-1482517967863-00e15c9b44be?w=500&h=350&fit=crop',
+    quote: 'The winter overlays are absolutely magical. My clients cannot stop raving about their Christmas photos!',
+    author: 'Laura M.',
+    link: '/shop',
+    linkText: 'Shop Overlays',
+  },
+  {
+    id: 7,
+    image: 'https://images.unsplash.com/photo-1544126592-807ade215a0b?w=500&h=350&fit=crop',
+    quote: 'These newborn presets give such soft, dreamy results. Every parent loves the final gallery.',
+    author: 'Emma S.',
+    link: '/shop',
+    linkText: 'Shop Newborn',
   },
 ];
 

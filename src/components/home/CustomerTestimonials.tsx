@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 const testimonials = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1594745561149-2211ca8c5d98?w=400&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1623091411395-09e79fdbfcf3?w=400&h=500&fit=crop',
     quote: 'These Lightroom presets transformed my maternity photography.',
     highlight: 'The skin tones are flawless and natural!',
     name: 'Diana S',
@@ -29,7 +29,7 @@ const testimonials = [
   },
   {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=500&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1606567595334-d39972c85dfd?w=400&h=500&fit=crop',
     quote: 'Easy-to-follow video tutorials included. These portrait presets let you',
     highlight: 'create stunning edits while keeping your unique style.',
     name: 'Anja M',
@@ -37,11 +37,29 @@ const testimonials = [
   },
   {
     id: 5,
-    image: 'https://images.unsplash.com/photo-1545048702-79362596cdc9?w=400&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1608096299210-db7e38487075?w=400&h=500&fit=crop',
     quote: 'Must-have Christmas mini session presets.',
     highlight: 'Fabulous holiday editing workflow',
     afterHighlight: 'that gives my photos a professional edge every time.',
     name: 'Sally M',
+    badge: 'Verified Customer Review',
+  },
+  {
+    id: 6,
+    image: 'https://images.unsplash.com/photo-1537655780520-1e392ead81f2?w=400&h=500&fit=crop',
+    quote: 'Perfect for wedding photographers.',
+    highlight: 'These presets capture romantic moments beautifully',
+    afterHighlight: 'and save me hours on each wedding album.',
+    name: 'Rachel K',
+    badge: 'Verified Customer Review',
+  },
+  {
+    id: 7,
+    image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=500&fit=crop',
+    quote: 'My pet photography business grew',
+    highlight: '200% since using these actions.',
+    afterHighlight: 'Clients love the vibrant, professional results.',
+    name: 'Marcus T',
     badge: 'Verified Customer Review',
   },
 ];

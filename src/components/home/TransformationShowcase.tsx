@@ -3,33 +3,33 @@ import { BeforeAfterSlider } from '@/components/products/BeforeAfterSlider';
 const transformations = [
   {
     title: 'Dreamy Newborn',
-    beforeImage: 'https://images.unsplash.com/photo-1544126592-807ade215a0b?q=80&w=800&auto=format&fit=crop&sat=-100',
-    afterImage: 'https://images.unsplash.com/photo-1544126592-807ade215a0b?q=80&w=800&auto=format&fit=crop',
+    beforeImage: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&h=600&fit=crop&sat=-100',
+    afterImage: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&h=600&fit=crop',
   },
   {
     title: 'Pet & Wildlife',
-    beforeImage: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=800&auto=format&fit=crop&sat=-100',
-    afterImage: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=800&auto=format&fit=crop',
+    beforeImage: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=600&fit=crop&sat=-100',
+    afterImage: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=600&fit=crop',
   },
   {
     title: 'Magical Christmas',
-    beforeImage: 'https://images.unsplash.com/photo-1482517967863-00e15c9b44be?q=80&w=800&auto=format&fit=crop&sat=-100',
-    afterImage: 'https://images.unsplash.com/photo-1482517967863-00e15c9b44be?q=80&w=800&auto=format&fit=crop',
+    beforeImage: 'https://images.unsplash.com/photo-1608096299210-db7e38487075?w=800&h=600&fit=crop&sat=-100',
+    afterImage: 'https://images.unsplash.com/photo-1608096299210-db7e38487075?w=800&h=600&fit=crop',
   },
   {
     title: 'Frosted Winter',
-    beforeImage: 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=800&auto=format&fit=crop&sat=-100',
-    afterImage: 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=800&auto=format&fit=crop',
+    beforeImage: 'https://images.unsplash.com/photo-1576919228236-a097c32a5cd4?w=800&h=600&fit=crop&sat=-100',
+    afterImage: 'https://images.unsplash.com/photo-1576919228236-a097c32a5cd4?w=800&h=600&fit=crop',
   },
   {
     title: 'Stunning Outdoor',
-    beforeImage: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?q=80&w=800&auto=format&fit=crop&sat=-100',
-    afterImage: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?q=80&w=800&auto=format&fit=crop',
+    beforeImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&sat=-100',
+    afterImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
   },
   {
     title: 'Portraiture',
-    beforeImage: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop&sat=-100',
-    afterImage: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop',
+    beforeImage: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&h=600&fit=crop&sat=-100',
+    afterImage: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&h=600&fit=crop',
   },
 ];
 
