@@ -4,6 +4,7 @@ import { TrustStrip } from '@/components/home/TrustStrip';
 import { TopPicks } from '@/components/home/TopPicks';
 import { MasonryGallery } from '@/components/home/MasonryGallery';
 import { SplitBanner } from '@/components/home/SplitBanner';
+import { CustomerTestimonials } from '@/components/home/CustomerTestimonials';
 import { TransformationShowcase } from '@/components/home/TransformationShowcase';
 import { FounderSection } from '@/components/home/FounderSection';
 
@@ -25,10 +26,13 @@ const Index = () => {
       {/* 5. Split Banner - 50/50 Layout */}
       <SplitBanner />
       
-      {/* 6. Before/After Slider Grid - Dark Background */}
+      {/* 6. Customer Testimonials Slider */}
+      <CustomerTestimonials />
+      
+      {/* 7. Before/After Slider Grid - Dark Background */}
       <TransformationShowcase />
       
-      {/* 7. Founder Section - Black with Circular Portrait */}
+      {/* 8. Founder Section - Black with Circular Portrait */}
       <FounderSection />
     </Layout>
   );
