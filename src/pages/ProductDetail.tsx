@@ -8,7 +8,8 @@ import { fetchProductByHandle } from '@/lib/shopify';
 import { toast } from 'sonner';
 
 import { ProductHero } from '@/components/product-detail/ProductHero';
-import { ProductGallery } from '@/components/product-detail/ProductGallery';
+import { CustomerGallerySlider } from '@/components/product-detail/CustomerGallerySlider';
+import { BeforeAfterGallery } from '@/components/product-detail/BeforeAfterGallery';
 import { WhatIsIncluded } from '@/components/product-detail/WhatIsIncluded';
 import { HowItWorks } from '@/components/product-detail/HowItWorks';
 import { ProductFAQ } from '@/components/product-detail/ProductFAQ';
@@ -153,11 +154,11 @@ export default function ProductDetail() {
         onAddToCart={handleAddToCart}
       />
 
-      {/* Gallery Section */}
-      <ProductGallery 
-        images={product.images.edges} 
-        title={product.title} 
-      />
+      {/* Customer Gallery Slider */}
+      <CustomerGallerySlider />
+
+      {/* Before/After Gallery */}
+      <BeforeAfterGallery />
 
       {/* What's Included */}
       <WhatIsIncluded productTitle={product.title} />

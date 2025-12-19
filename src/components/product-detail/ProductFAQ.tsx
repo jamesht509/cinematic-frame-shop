@@ -9,27 +9,27 @@ export function ProductFAQ() {
   const faqs = [
     {
       question: "What software do I need to use these backgrounds?",
-      answer: "These digital backgrounds work best with Adobe Photoshop, but they can also be used with other photo editing software that supports layers and masking, such as GIMP, Affinity Photo, or Photoshop Elements.",
+      answer: "Adobe Photoshop is recommended for best results, but these digital backdrops also work with other photo editing software that supports layers and masking, such as GIMP, Affinity Photo, or Photoshop Elements.",
     },
     {
       question: "What resolution are the files?",
       answer: "All backgrounds are provided in high resolution (minimum 4000px on the longest side) at 300 DPI, ensuring they're suitable for printing at large sizes without any loss of quality.",
     },
     {
+      question: "Is my payment secure?",
+      answer: "Absolutely! All transactions are 100% secure with SSL encryption. We use trusted payment providers like Stripe and PayPal to process your payments safely.",
+    },
+    {
+      question: "How will I receive the files?",
+      answer: "Immediately after purchase, you'll receive an email with download links. You'll have lifetime access to re-download your files whenever you need them.",
+    },
+    {
       question: "Can I use these for commercial photography?",
       answer: "Yes! Our license allows you to use these backgrounds for both personal and commercial projects. You can use them for client work, sell prints, and include them in your portfolio.",
     },
     {
-      question: "How will I receive my files?",
-      answer: "Immediately after purchase, you'll receive an email with a download link. You'll have lifetime access to re-download your files whenever you need them.",
-    },
-    {
-      question: "Do you offer refunds?",
-      answer: "Due to the digital nature of our products, we cannot offer refunds once the files have been downloaded. However, if you experience any issues, please contact us and we'll do our best to help.",
-    },
-    {
-      question: "Are tutorials included?",
-      answer: "Yes! Each bundle includes a quick-start guide with tips and techniques for getting the best results. We also have free video tutorials available on our YouTube channel.",
+      question: "What's your refund policy?",
+      answer: "We offer a 7-day money-back guarantee. If you're not satisfied with your purchase, contact us within 7 days and we'll provide a full refund, no questions asked.",
     },
   ];
 
