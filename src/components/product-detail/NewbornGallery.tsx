@@ -1,13 +1,13 @@
 import woodlandNestNewborn from '@/assets/gallery/woodland-nest-newborn.webp';
 import tulipBasketNewborn from '@/assets/gallery/tulip-basket-newborn.webp';
-import woodlandNest from '@/assets/gallery/woodland-nest.webp';
 import cozyDreams from '@/assets/gallery/cozy-dreams.webp';
+import secretGarden from '@/assets/gallery/secret-garden.webp';
 
 const newbornImages = [
   { src: woodlandNestNewborn, title: 'Woodland Nest', category: 'Natural' },
   { src: tulipBasketNewborn, title: 'Tulip Basket', category: 'Spring' },
-  { src: woodlandNest, title: 'Forest Dreams', category: 'Organic' },
   { src: cozyDreams, title: 'Cozy Dreams', category: 'Soft' },
+  { src: secretGarden, title: 'Secret Garden', category: 'Floral' },
 ];
 
 export function NewbornGallery() {
