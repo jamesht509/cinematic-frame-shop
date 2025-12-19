@@ -29,44 +29,24 @@ export function BabyFantasyGallery() {
           </p>
         </div>
 
-        {/* Featured Large Image + Side Images */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {/* Large Featured Image */}
-          <div className="group relative overflow-hidden rounded-xl aspect-[3/4] lg:col-span-2 lg:row-span-2">
-            <img
-              src={fantasyImages[0].src}
-              alt={fantasyImages[0].title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute bottom-0 left-0 right-0 p-8">
-                <span className="text-gold text-xs font-medium tracking-wider uppercase">
-                  {fantasyImages[0].category}
-                </span>
-                <h3 className="text-white text-2xl font-serif font-medium mt-1">
-                  {fantasyImages[0].title}
-                </h3>
-              </div>
-            </div>
-          </div>
-
-          {/* Side Images */}
-          {fantasyImages.slice(1).map((image, index) => (
+        {/* Clean Grid Layout - All same aspect ratio */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
+          {fantasyImages.map((image, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-xl aspect-[4/3]"
+              className="group relative overflow-hidden rounded-xl aspect-[3/4]"
             >
               <img
                 src={image.src}
                 alt={image.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <span className="text-gold text-xs font-medium tracking-wider uppercase">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <span className="text-gold text-[10px] font-medium tracking-wider uppercase">
                     {image.category}
                   </span>
-                  <h3 className="text-white text-xl font-serif font-medium mt-1">
+                  <h3 className="text-white text-sm md:text-base font-serif font-medium mt-0.5 leading-tight">
                     {image.title}
                   </h3>
                 </div>
