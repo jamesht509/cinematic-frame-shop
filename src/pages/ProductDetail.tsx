@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 
 import { ProductHero } from '@/components/product-detail/ProductHero';
 import { FreeBonuses } from '@/components/product-detail/FreeBonuses';
+import { BeforeAfterShowcase } from '@/components/product-detail/BeforeAfterShowcase';
 import { PhotoshopActionFeature } from '@/components/product-detail/PhotoshopActionFeature';
 import { MaternityGallery } from '@/components/product-detail/MaternityGallery';
 import { NewbornGallery } from '@/components/product-detail/NewbornGallery';
@@ -166,6 +167,9 @@ export default function ProductDetail() {
 
       {/* Exclusive Photoshop Action Feature */}
       <PhotoshopActionFeature />
+
+      {/* Before & After Showcase */}
+      <BeforeAfterShowcase />
 
       {/* Themed Gallery Sections */}
       <MaternityGallery />
