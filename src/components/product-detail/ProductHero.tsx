@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ShoppingBag, Check, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import productHeroMain from '@/assets/product-hero-main.png';
 
 interface ProductHeroProps {
   product: {
@@ -42,7 +43,6 @@ interface ProductHeroProps {
 }
 
 export function ProductHero({ product, selectedVariant, onVariantChange, onAddToCart }: ProductHeroProps) {
-  const [selectedImage, setSelectedImage] = useState(0);
   const currentVariant = product.variants.edges.find(v => v.node.id === selectedVariant)?.node;
 
   const features = [
@@ -58,34 +58,13 @@ export function ProductHero({ product, selectedVariant, onVariantChange, onAddTo
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* Left - Images */}
           <div className="space-y-4">
-            <div className="aspect-[4/3] rounded-lg overflow-hidden bg-charcoal-light">
-              {product.images.edges[selectedImage]?.node && (
-                <img
-                  src={product.images.edges[selectedImage].node.url}
-                  alt={product.images.edges[selectedImage].node.altText || product.title}
-                  className="w-full h-full object-cover"
-                />
-              )}
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-charcoal-light shadow-2xl">
+              <img
+                src={productHeroMain}
+                alt={product.title}
+                className="w-full h-full object-cover"
+              />
             </div>
-            {product.images.edges.length > 1 && (
-              <div className="grid grid-cols-5 gap-2">
-                {product.images.edges.slice(0, 5).map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`aspect-square rounded overflow-hidden bg-charcoal-light transition-all ${
-                      selectedImage === index ? 'ring-2 ring-gold' : 'opacity-70 hover:opacity-100'
-                    }`}
-                  >
-                    <img
-                      src={image.node.url}
-                      alt={image.node.altText || ''}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
 
           {/* Right - Product Info */}
