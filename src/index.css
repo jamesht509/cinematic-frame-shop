@@ -214,3 +214,72 @@
     }
   }
 }
+
+/* Print Styles for PDF Template */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .print\\:hidden {
+    display: none !important;
+  }
+
+  .pdf-template {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+    font-size: 11pt !important;
+  }
+
+  .pdf-template * {
+    break-inside: avoid;
+  }
+
+  .pdf-template section {
+    page-break-inside: avoid;
+  }
+
+  .pdf-template a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
+  .pdf-template .bg-charcoal-900 {
+    background: white !important;
+    border: 1px solid #333 !important;
+    color: #333 !important;
+  }
+
+  .pdf-template [class*="bg-gold"] {
+    background: #f8f5e6 !important;
+  }
+
+  .pdf-template .border-gold {
+    border-color: #C5A059 !important;
+  }
+
+  .pdf-template .text-gold {
+    color: #C5A059 !important;
+  }
+
+  .pdf-template .bg-gold {
+    background: #C5A059 !important;
+  }
+
+  .pdf-template .text-primary {
+    color: #780000 !important;
+  }
+
+  .pdf-template .bg-primary {
+    background: #780000 !important;
+  }
+}
