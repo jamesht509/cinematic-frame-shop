@@ -1,9 +1,15 @@
 import unicornRainbowFantasy from '@/assets/gallery/unicorn-rainbow-fantasy.webp';
-import unicornFantasy from '@/assets/gallery/unicorn-fantasy.webp';
+import blueHatBaby from '@/assets/gallery/blue-hat-baby.webp';
+import fairyLantern from '@/assets/gallery/fairy-lantern.webp';
+import goldenReindeer from '@/assets/gallery/golden-reindeer.webp';
+import circusBaby from '@/assets/gallery/circus-baby.webp';
 
 const fantasyImages = [
   { src: unicornRainbowFantasy, title: 'Rainbow Unicorn', category: 'Magical' },
-  { src: unicornFantasy, title: 'Unicorn Dreams', category: 'Fantasy' },
+  { src: blueHatBaby, title: 'Vintage Whimsy', category: 'Baby Portrait' },
+  { src: fairyLantern, title: 'Enchanted Fairy', category: 'Fantasy' },
+  { src: goldenReindeer, title: 'Christmas Wish', category: 'Holiday Magic' },
+  { src: circusBaby, title: 'Under The Big Top', category: 'Circus' },
 ];
 
 export function BabyFantasyGallery() {
@@ -24,9 +30,9 @@ export function BabyFantasyGallery() {
         </div>
 
         {/* Featured Large Image + Side Images */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {/* Large Featured Image */}
-          <div className="group relative overflow-hidden rounded-xl aspect-[3/4] lg:row-span-2">
+          <div className="group relative overflow-hidden rounded-xl aspect-[3/4] lg:col-span-2 lg:row-span-2">
             <img
               src={fantasyImages[0].src}
               alt={fantasyImages[0].title}
