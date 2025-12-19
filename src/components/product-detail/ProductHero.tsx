@@ -58,11 +58,11 @@ export function ProductHero({ product, selectedVariant, onVariantChange, onAddTo
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* Left - Images */}
           <div className="space-y-4">
-            <div className="rounded-2xl overflow-hidden bg-charcoal-light shadow-2xl">
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-charcoal-light shadow-2xl">
               <img
                 src={productHeroMain}
                 alt={product.title}
-                className="w-full h-auto object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
