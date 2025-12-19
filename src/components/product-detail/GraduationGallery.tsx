@@ -1,13 +1,9 @@
 import kidsGraduation from '@/assets/gallery/kids-graduation.webp';
 import lawGraduation from '@/assets/gallery/law-graduation.webp';
-import futureLawyer from '@/assets/gallery/future-lawyer.webp';
-import littleScholar from '@/assets/gallery/little-scholar.webp';
 
 const graduationImages = [
   { src: kidsGraduation, title: 'Little Graduate', category: 'Preschool' },
   { src: lawGraduation, title: 'Law School', category: 'University' },
-  { src: futureLawyer, title: 'Future Lawyer', category: 'Kids' },
-  { src: littleScholar, title: 'Little Scholar', category: 'Academic' },
 ];
 
 export function GraduationGallery() {

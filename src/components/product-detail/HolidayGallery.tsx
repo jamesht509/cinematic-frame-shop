@@ -1,15 +1,11 @@
 import christmasScene from '@/assets/gallery/christmas-scene.webp';
 import christmasBaby from '@/assets/gallery/christmas-baby.webp';
-import christmasTreeBaby from '@/assets/gallery/christmas-tree-baby.webp';
 import christmasMagic from '@/assets/gallery/christmas-magic.webp';
-import halloweenOverlay from '@/assets/gallery/halloween-overlay.webp';
 
 const holidayImages = [
   { src: christmasScene, title: 'Christmas Magic', category: 'Christmas' },
   { src: christmasBaby, title: 'Holiday Baby', category: 'Christmas' },
-  { src: christmasTreeBaby, title: 'Tree Time', category: 'Christmas' },
   { src: christmasMagic, title: 'Winter Wonder', category: 'Christmas' },
-  { src: halloweenOverlay, title: 'Spooky Night', category: 'Halloween' },
 ];
 
 export function HolidayGallery() {

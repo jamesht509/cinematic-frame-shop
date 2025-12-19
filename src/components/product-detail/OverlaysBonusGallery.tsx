@@ -7,8 +7,10 @@ import balloonsOverlay from '@/assets/gallery/balloons-overlay.webp';
 import bonusSparkles from '@/assets/gallery/bonus-sparkles.webp';
 import bonusLights from '@/assets/gallery/bonus-lights.webp';
 import patronusOverlay from '@/assets/gallery/patronus-overlay.webp';
+import halloweenOverlay from '@/assets/gallery/halloween-overlay.webp';
 
 const overlayImages = [
+  { src: halloweenOverlay, title: 'Halloween', category: 'Spooky' },
   { src: glitterOverlay, title: 'Glitter', category: 'Sparkle' },
   { src: smokeOverlay, title: 'Smoke', category: 'Atmosphere' },
   { src: bubblesOverlay, title: 'Bubbles', category: 'Playful' },

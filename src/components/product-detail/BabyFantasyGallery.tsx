@@ -1,11 +1,9 @@
 import unicornRainbowFantasy from '@/assets/gallery/unicorn-rainbow-fantasy.webp';
 import unicornFantasy from '@/assets/gallery/unicorn-fantasy.webp';
-import secretGarden from '@/assets/gallery/secret-garden.webp';
 
 const fantasyImages = [
   { src: unicornRainbowFantasy, title: 'Rainbow Unicorn', category: 'Magical' },
   { src: unicornFantasy, title: 'Unicorn Dreams', category: 'Fantasy' },
-  { src: secretGarden, title: 'Secret Garden', category: 'Whimsical' },
 ];
 
 export function BabyFantasyGallery() {
