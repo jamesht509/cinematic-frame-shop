@@ -42,7 +42,8 @@ export function BeforeAfterSlider({
     <div
       ref={containerRef}
       className={cn(
-        'relative aspect-[4/3] md:aspect-[16/10] overflow-hidden cursor-ew-resize select-none',
+        'relative overflow-hidden cursor-ew-resize select-none',
+        !className?.includes('aspect-') && 'aspect-[4/3] md:aspect-[16/10]',
         className
       )}
       onMouseEnter={() => setIsHovering(true)}
