@@ -1,4 +1,4 @@
-import { Download, Image, FileImage, Layers } from 'lucide-react';
+import { Download, Image, FileImage, Layers, Video, Users, RefreshCw, Gift } from 'lucide-react';
 
 interface WhatIsIncludedProps {
   productTitle: string;
@@ -8,23 +8,33 @@ export function WhatIsIncluded({ productTitle }: WhatIsIncludedProps) {
   const items = [
     {
       icon: Image,
-      title: 'High-Resolution Backgrounds',
-      description: 'Multiple stunning backgrounds ready for compositing',
+      title: '100+ Digital Backdrops',
+      description: 'High-resolution files at 300 DPI, ready for large prints',
     },
     {
       icon: Layers,
-      title: 'PNG Overlays',
-      description: 'Transparent overlays to enhance your images',
+      title: 'Multiple Themes',
+      description: 'Maternity, Newborn, Graduation, Christmas, Fine Art & more',
     },
     {
-      icon: FileImage,
-      title: 'Quick-Start Guide',
-      description: 'Step-by-step instructions to get you started',
+      icon: Video,
+      title: 'Video Tutorials',
+      description: 'Step-by-step installation and editing guides included',
     },
     {
-      icon: Download,
-      title: 'Instant Download',
-      description: 'Access your files immediately after purchase',
+      icon: Users,
+      title: 'VIP Community Access',
+      description: 'Join our exclusive Facebook group for tips & inspiration',
+    },
+    {
+      icon: RefreshCw,
+      title: '1 Year Free Updates',
+      description: 'New backdrops added regularly to your collection',
+    },
+    {
+      icon: Gift,
+      title: 'Bonus Overlay Pack',
+      description: 'Extra elements to enhance your compositions',
     },
   ];
 
@@ -40,7 +50,7 @@ export function WhatIsIncluded({ productTitle }: WhatIsIncludedProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {items.map((item, index) => (
             <div 
               key={index}
