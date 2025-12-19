@@ -9,9 +9,11 @@ import pinkGardenMaternity from '@/assets/gallery/pink-garden-maternity.webp';
 import roseArchMaternity from '@/assets/gallery/rose-arch-maternity.webp';
 import goldenRingMaternity from '@/assets/gallery/golden-ring-maternity.webp';
 import lavenderMaternity from '@/assets/gallery/lavender-maternity.webp';
+import secretGarden from '@/assets/gallery/secret-garden.webp';
 
 const maternityImages = [
   { src: castleMaternity, title: 'Castle Garden', category: 'Fine Art' },
+  { src: secretGarden, title: 'Secret Garden', category: 'Nature' },
   { src: redRosesMaternity, title: 'Red Rose Romance', category: 'Romantic' },
   { src: ivyArchMaternity, title: 'Ivy Arch', category: 'Natural' },
   { src: goldenCircleMaternity, title: 'Golden Circle', category: 'Elegant' },
