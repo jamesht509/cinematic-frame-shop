@@ -8,8 +8,12 @@ import { fetchProductByHandle } from '@/lib/shopify';
 import { toast } from 'sonner';
 
 import { ProductHero } from '@/components/product-detail/ProductHero';
-import { CustomerGallerySlider } from '@/components/product-detail/CustomerGallerySlider';
-import { BeforeAfterGallery } from '@/components/product-detail/BeforeAfterGallery';
+import { MaternityGallery } from '@/components/product-detail/MaternityGallery';
+import { NewbornGallery } from '@/components/product-detail/NewbornGallery';
+import { GraduationGallery } from '@/components/product-detail/GraduationGallery';
+import { BabyFantasyGallery } from '@/components/product-detail/BabyFantasyGallery';
+import { HolidayGallery } from '@/components/product-detail/HolidayGallery';
+import { OverlaysBonusGallery } from '@/components/product-detail/OverlaysBonusGallery';
 import { WhatIsIncluded } from '@/components/product-detail/WhatIsIncluded';
 import { HowItWorks } from '@/components/product-detail/HowItWorks';
 import { ProductFAQ } from '@/components/product-detail/ProductFAQ';
@@ -154,11 +158,13 @@ export default function ProductDetail() {
         onAddToCart={handleAddToCart}
       />
 
-      {/* Customer Gallery Slider */}
-      <CustomerGallerySlider />
-
-      {/* Before/After Gallery */}
-      <BeforeAfterGallery />
+      {/* Themed Gallery Sections */}
+      <MaternityGallery />
+      <NewbornGallery />
+      <GraduationGallery />
+      <BabyFantasyGallery />
+      <HolidayGallery />
+      <OverlaysBonusGallery />
 
       {/* What's Included */}
       <WhatIsIncluded productTitle={product.title} />
