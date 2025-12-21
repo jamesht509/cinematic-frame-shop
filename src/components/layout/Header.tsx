@@ -8,8 +8,8 @@ import logoImg from '@/assets/logo.png';
 
 // Anchor links for single-product landing page
 const navLinks = [
-  { label: 'WHAT\'S INCLUDED', href: '#whats-included' },
-  { label: 'HOW IT WORKS', href: '#how-it-works' },
+  { label: 'What\'s Included', href: '#whats-included' },
+  { label: 'How It Works', href: '#how-it-works' },
   { label: 'FAQ', href: '#faq' },
 ];
 
@@ -43,33 +43,31 @@ export function Header() {
         <span>✨ It's Magic Season! 50% OFF Today Only ✨</span>
       </div>
 
-      {/* Main Header */}
+      {/* Main Header - White background like reference */}
       <header
         className={cn(
-          'sticky top-0 left-0 right-0 z-50 transition-all duration-300',
-          isScrolled 
-            ? 'bg-charcoal-dark/95 backdrop-blur-md border-b border-charcoal shadow-lg' 
-            : 'bg-transparent'
+          'sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100',
+          isScrolled && 'shadow-sm'
         )}
       >
         <div className="container-wide">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo - Left */}
+          <div className="flex items-center justify-between h-20 md:h-24 lg:h-28">
+            {/* Logo - Left, bigger like reference */}
             <Link to="/" className="flex-shrink-0">
               <img 
                 src={logoImg} 
                 alt="JM Presets" 
-                className="h-8 md:h-10 lg:h-12 w-auto"
+                className="h-12 md:h-16 lg:h-20 w-auto"
               />
             </Link>
 
             {/* Desktop Navigation - Center */}
-            <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
+            <nav className="hidden lg:flex items-center gap-10">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-sm font-semibold text-white/80 hover:text-gold transition-colors duration-200 tracking-widest"
+                  className="text-sm font-medium text-charcoal-dark hover:text-gold transition-colors duration-200"
                 >
                   {link.label}
                 </button>
@@ -77,16 +75,16 @@ export function Header() {
             </nav>
 
             {/* Actions - Right */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white hover:text-gold relative"
+                className="text-charcoal-dark hover:text-gold relative"
                 onClick={openCart}
               >
                 <ShoppingBag className="h-5 w-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-gold text-charcoal-dark text-xs font-bold flex items-center justify-center rounded-full">
+                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-gold text-white text-xs font-bold flex items-center justify-center rounded-full">
                     {totalItems}
                   </span>
                 )}
@@ -96,7 +94,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden text-white"
+                className="lg:hidden text-charcoal-dark"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -107,13 +105,13 @@ export function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-charcoal-dark border-t border-charcoal animate-fade-in">
+          <div className="lg:hidden bg-white border-t border-gray-100 animate-fade-in">
             <nav className="container-wide py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-base font-semibold text-white/80 hover:text-gold transition-colors py-2 tracking-widest text-left"
+                  className="text-base font-medium text-charcoal-dark hover:text-gold transition-colors py-2 text-left"
                 >
                   {link.label}
                 </button>
