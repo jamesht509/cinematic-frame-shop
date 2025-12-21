@@ -43,21 +43,16 @@ export function Header() {
         <span>✨ It's Magic Season! 50% OFF Today Only ✨</span>
       </div>
 
-      {/* Main Header - White background like reference */}
-      <header
-        className={cn(
-          'sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100',
-          isScrolled && 'shadow-sm'
-        )}
-      >
+      {/* Main Header - Black background, not sticky */}
+      <header className="relative z-50 bg-charcoal-dark border-b border-charcoal">
         <div className="container-wide">
-          <div className="flex items-center justify-between h-20 md:h-24 lg:h-28">
-            {/* Logo - Left, bigger like reference */}
+          <div className="flex items-center justify-between h-24 md:h-28 lg:h-32">
+            {/* Logo - Left, bigger */}
             <Link to="/" className="flex-shrink-0">
               <img 
                 src={logoImg} 
                 alt="JM Presets" 
-                className="h-12 md:h-16 lg:h-20 w-auto"
+                className="h-16 md:h-20 lg:h-24 w-auto"
               />
             </Link>
 
@@ -67,7 +62,7 @@ export function Header() {
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-sm font-medium text-charcoal-dark hover:text-gold transition-colors duration-200"
+                  className="text-sm font-medium text-white/80 hover:text-gold transition-colors duration-200"
                 >
                   {link.label}
                 </button>
@@ -79,12 +74,12 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-charcoal-dark hover:text-gold relative"
+                className="text-white hover:text-gold relative"
                 onClick={openCart}
               >
                 <ShoppingBag className="h-5 w-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-gold text-white text-xs font-bold flex items-center justify-center rounded-full">
+                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-gold text-charcoal-dark text-xs font-bold flex items-center justify-center rounded-full">
                     {totalItems}
                   </span>
                 )}
@@ -94,7 +89,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden text-charcoal-dark"
+                className="lg:hidden text-white"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -105,13 +100,13 @@ export function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-100 animate-fade-in">
+          <div className="lg:hidden bg-charcoal-dark border-t border-charcoal animate-fade-in">
             <nav className="container-wide py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-base font-medium text-charcoal-dark hover:text-gold transition-colors py-2 text-left"
+                  className="text-base font-medium text-white/80 hover:text-gold transition-colors py-2 text-left"
                 >
                   {link.label}
                 </button>
