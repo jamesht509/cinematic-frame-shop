@@ -5,15 +5,16 @@ import { Button } from '@/components/ui/button';
 import { useCartStore, useCartTotalItems } from '@/stores/cartStore';
 import { cn } from '@/lib/utils';
 import logoImg from '@/assets/logo.png';
+import { ht } from '@/locales/ht/translations';
 
 // Anchor links for single-product landing page
 const navLinks = [
-  { label: 'What\'s Included', href: '#whats-included' },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'FAQ', href: '#faq' },
+  { label: ht.header.nav.whatsIncluded, href: '#whats-included' },
+  { label: ht.header.nav.howItWorks, href: '#how-it-works' },
+  { label: ht.header.nav.faq, href: '#faq' },
 ];
 
-export function Header() {
+export function HeaderHT() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const totalItems = useCartTotalItems();
@@ -40,7 +41,7 @@ export function Header() {
     <>
       {/* Announcement Bar */}
       <div className="announcement-bar">
-        <span>✨ It's Magic Season! 50% OFF Today Only ✨</span>
+        <span>{ht.header.announcement}</span>
       </div>
 
       {/* Main Header - Black background, not sticky */}
@@ -48,7 +49,7 @@ export function Header() {
         <div className="container-wide">
           <div className="flex items-center justify-between h-28 md:h-32 lg:h-36">
             {/* Logo - Left, bigger */}
-            <Link to="/" className="flex-shrink-0">
+            <Link to="/ht" className="flex-shrink-0">
               <img 
                 src={logoImg} 
                 alt="JM Presets" 
@@ -73,10 +74,10 @@ export function Header() {
             <div className="flex items-center gap-3">
               {/* Language Toggle */}
               <Link 
-                to="/ht"
+                to="/"
                 className="text-xs text-white/60 hover:text-gold transition-colors px-2 py-1 border border-white/20 rounded"
               >
-                🇭🇹 HT
+                🇺🇸 EN
               </Link>
 
               <Button
