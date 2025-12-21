@@ -46,13 +46,13 @@ export function Header() {
       {/* Main Header - Black background, not sticky */}
       <header className="relative z-50 bg-charcoal-dark border-b border-charcoal">
         <div className="container-wide">
-          <div className="flex items-center justify-between h-24 md:h-28 lg:h-32">
+          <div className="flex items-center justify-between h-28 md:h-32 lg:h-36">
             {/* Logo - Left, bigger */}
             <Link to="/" className="flex-shrink-0">
               <img 
                 src={logoImg} 
                 alt="JM Presets" 
-                className="h-16 md:h-20 lg:h-24 w-auto"
+                className="h-20 md:h-24 lg:h-28 w-auto"
               />
             </Link>
 
