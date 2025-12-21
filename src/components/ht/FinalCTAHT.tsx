@@ -1,6 +1,5 @@
 import { ShoppingBag, Download, Clock, Sparkles, Star, CheckCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { GuaranteeBadgeHT } from './GuaranteeBadgeHT';
 import { ht } from '@/locales/ht/translations';
 
 interface FinalCTAHTProps {
@@ -94,10 +93,6 @@ export function FinalCTAHT({ price, currencyCode, onAddToCart }: FinalCTAHTProps
             </div>
           </div>
 
-          {/* Guarantee */}
-          <div className="mt-10">
-            <GuaranteeBadgeHT variant="block" />
-          </div>
         </div>
       </div>
     </section>
