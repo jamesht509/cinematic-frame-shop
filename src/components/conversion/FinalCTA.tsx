@@ -1,6 +1,5 @@
 import { ShoppingBag, Download, Clock, Sparkles, Star, CheckCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { GuaranteeBadge } from './GuaranteeBadge';
 
 interface FinalCTAProps {
   price: string;
@@ -9,7 +8,7 @@ interface FinalCTAProps {
 }
 
 const valueItems = [
-  { label: '500+ Premium Backdrops', value: '$297' },
+  { label: '2000+ Premium Backdrops', value: '$297' },
   { label: 'Exclusive Photoshop Action', value: '$97' },
   { label: '50+ Overlays & Textures', value: '$67' },
   { label: 'Video Tutorials', value: '$47' },
@@ -39,7 +38,7 @@ export function FinalCTA({ price, currencyCode, onAddToCart }: FinalCTAProps) {
           </h2>
 
           <p className="text-lg text-white/70 mb-10 max-w-2xl mx-auto">
-            Join 500+ photographers who are already creating stunning images with our premium backdrops collection
+            Join 2000+ photographers who are already creating stunning images with our premium backdrops collection
           </p>
 
           {/* Value Stack */}
@@ -96,14 +95,9 @@ export function FinalCTA({ price, currencyCode, onAddToCart }: FinalCTAProps) {
               </span>
               <span className="flex items-center gap-1">
                 <Star className="h-4 w-4 text-yellow-400" />
-                500+ Happy Customers
+                2000+ Happy Customers
               </span>
             </div>
-          </div>
-
-          {/* Guarantee */}
-          <div className="mt-10">
-            <GuaranteeBadge variant="block" />
           </div>
         </div>
       </div>
