@@ -40,7 +40,7 @@ export function Header() {
     <>
       {/* Announcement Bar */}
       <div className="announcement-bar">
-        <span>✨ It's Magic Season! 50% OFF Today Only ✨</span>
+        <span>✨ It's Magic Season! 75% OFF Today Only ✨</span>
       </div>
 
       {/* Main Header - Black background, not sticky */}

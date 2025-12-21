@@ -95,7 +95,7 @@ export function ProductHeroSlider({
                 ))}
               </div>
               <span className="text-white/30">|</span>
-              <span className="text-sm text-white/80">500+ Happy Photographers</span>
+              <span className="text-sm text-white/80">2000+ Happy Photographers</span>
             </div>
 
             {/* Badge */}
@@ -111,7 +111,7 @@ export function ProductHeroSlider({
 
             {/* Description */}
             <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-xl">
-              Transform any photo into a stunning work of art. 500+ premium digital backdrops for maternity, newborn, graduation, holidays & more.
+              Transform any photo into a stunning work of art. 2000+ premium digital backdrops for maternity, newborn, graduation, holidays & more.
             </p>
 
             {/* Price & CTA */}
@@ -141,11 +141,9 @@ export function ProductHeroSlider({
                 Instant Download
               </span>
               <span>•</span>
-              <span>500+ Backdrops</span>
+              <span>2000+ Backdrops</span>
               <span>•</span>
               <span>Lifetime Access</span>
-              <span>•</span>
-              <span className="text-green-400">7-Day Guarantee</span>
             </div>
           </div>
         </div>
