@@ -73,8 +73,8 @@ export const ht = {
   // Section CTAs
   cta: {
     photoshopAction: {
-      heading: "Jwenn Photoshop Action GRATIS!",
-      subheading: "Ladan l ak achte w — valè $97"
+      heading: "Action ki Chanje Background lan Gratis",
+      subheading: "Action an Gratis ti cheri !"
     },
     beforeAfter: {
       heading: "Wè Magic la? Achte l Kounye a!",
