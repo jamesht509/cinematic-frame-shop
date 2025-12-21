@@ -4,6 +4,7 @@ import { ShoppingBag, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore, useCartTotalItems } from '@/stores/cartStore';
 import { cn } from '@/lib/utils';
+import logoImg from '@/assets/logo.png';
 
 // Anchor links for single-product landing page
 const navLinks = [
@@ -55,9 +56,11 @@ export function Header() {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo - Left */}
             <Link to="/" className="flex-shrink-0">
-              <h1 className="text-xl md:text-2xl font-serif font-bold tracking-wider text-white">
-                LUMIÈRE
-              </h1>
+              <img 
+                src={logoImg} 
+                alt="JM Presets" 
+                className="h-8 md:h-10 lg:h-12 w-auto"
+              />
             </Link>
 
             {/* Desktop Navigation - Center */}
