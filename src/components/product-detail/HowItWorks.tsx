@@ -25,7 +25,7 @@ export function HowItWorks() {
   ];
 
   return (
-    <section className="py-16 bg-charcoal text-white">
+    <section id="how-it-works" className="py-16 bg-charcoal text-white scroll-mt-24">
       <div className="container-wide">
         <div className="text-center mb-12">
           <span className="text-gold uppercase tracking-widest text-sm font-medium">Simple Process</span>

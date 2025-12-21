@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Menu, X, Search, User } from 'lucide-react';
+import { ShoppingBag, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore, useCartTotalItems } from '@/stores/cartStore';
 import { cn } from '@/lib/utils';
 
+// Anchor links for single-product landing page
 const navLinks = [
-  { label: 'SHOP ALL', href: '/shop' },
-  { label: 'PRESETS', href: '/collections/presets' },
-  { label: 'ACTIONS', href: '/collections/actions' },
-  { label: 'BUNDLES', href: '/collections/bundles' },
-  { label: 'ABOUT', href: '/about' },
+  { label: 'WHAT\'S INCLUDED', href: '#whats-included' },
+  { label: 'HOW IT WORKS', href: '#how-it-works' },
+  { label: 'FAQ', href: '#faq' },
 ];
 
 export function Header() {
@@ -27,17 +26,29 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (href: string) => {
+    const id = href.replace('#', '');
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
       {/* Announcement Bar */}
       <div className="announcement-bar">
-        <span>✨ It's Magic Season! 50% OFF Bundles ✨</span>
+        <span>✨ It's Magic Season! 50% OFF Today Only ✨</span>
       </div>
 
       {/* Main Header */}
       <header
         className={cn(
-          'sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-charcoal-dark border-b border-charcoal'
+          'sticky top-0 left-0 right-0 z-50 transition-all duration-300',
+          isScrolled 
+            ? 'bg-charcoal-dark/95 backdrop-blur-md border-b border-charcoal shadow-lg' 
+            : 'bg-transparent'
         )}
       >
         <div className="container-wide">
@@ -52,24 +63,18 @@ export function Header() {
             {/* Desktop Navigation - Center */}
             <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
               {navLinks.map((link) => (
-                <Link
+                <button
                   key={link.href}
-                  to={link.href}
+                  onClick={() => scrollToSection(link.href)}
                   className="text-sm font-semibold text-white/80 hover:text-gold transition-colors duration-200 tracking-widest"
                 >
                   {link.label}
-                </Link>
+                </button>
               ))}
             </nav>
 
             {/* Actions - Right */}
-            <div className="flex items-center gap-1">
-              <Button variant="ghost" size="icon" className="text-white hover:text-gold hidden md:flex">
-                <Search className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-white hover:text-gold hidden md:flex">
-                <User className="h-5 w-5" />
-              </Button>
+            <div className="flex items-center gap-2">
               <Button
                 variant="ghost"
                 size="icon"
@@ -78,7 +83,7 @@ export function Header() {
               >
                 <ShoppingBag className="h-5 w-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-gold text-charcoal-dark text-xs font-bold flex items-center justify-center rounded-full">
                     {totalItems}
                   </span>
                 )}
@@ -102,14 +107,13 @@ export function Header() {
           <div className="lg:hidden bg-charcoal-dark border-t border-charcoal animate-fade-in">
             <nav className="container-wide py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <Link
+                <button
                   key={link.href}
-                  to={link.href}
-                  className="text-base font-semibold text-white/80 hover:text-gold transition-colors py-2 tracking-widest"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => scrollToSection(link.href)}
+                  className="text-base font-semibold text-white/80 hover:text-gold transition-colors py-2 tracking-widest text-left"
                 >
                   {link.label}
-                </Link>
+                </button>
               ))}
             </nav>
           </div>
