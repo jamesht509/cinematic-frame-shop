@@ -1,112 +1,70 @@
-import { Link } from 'react-router-dom';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Instagram, Youtube, Mail } from 'lucide-react';
 
+import logoImg from '@/assets/logo.png';
+
 const footerLinks = {
-  shop: [
-    { label: 'All Products', href: '/shop' },
-    { label: 'Presets', href: '/collections/presets' },
-    { label: 'Actions', href: '/collections/actions' },
-    { label: 'Bundles', href: '/collections/bundles' },
-  ],
   support: [
-    { label: 'Installation Guide', href: '/support/installation' },
-    { label: 'FAQ', href: '/support/faq' },
-    { label: 'Contact Us', href: '/contact' },
-    { label: 'Refund Policy', href: '/policies/refunds' },
+    { label: 'How to Install', href: '#how-it-works' },
+    { label: 'FAQ', href: '#faq' },
+    { label: 'Contact', href: 'mailto:contato@jmpresets.com' },
   ],
-  company: [
-    { label: 'About', href: '/about' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Affiliates', href: '/affiliates' },
-    { label: 'Terms of Service', href: '/policies/terms' },
+  legal: [
+    { label: 'Refund Policy', href: '#' },
+    { label: 'Terms of Use', href: '#' },
+    { label: 'Privacy', href: '#' },
   ],
 };
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="container-wide py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
-          {/* Brand & Newsletter */}
-          <div className="lg:col-span-2">
-            <h2 className="text-2xl font-serif font-semibold tracking-wide text-foreground mb-4">
-              LUMIÈRE
-            </h2>
-            <p className="text-muted-foreground mb-6 max-w-sm">
-              Premium Lightroom presets and Photoshop actions for photographers who demand excellence.
-            </p>
-            <div className="space-y-3">
-              <p className="text-sm font-medium text-foreground">Subscribe to our newsletter</p>
-              <div className="flex gap-2">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="bg-background border-border focus:border-primary"
-                />
-                <Button className="btn-gold shrink-0">
-                  Subscribe
-                </Button>
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Get 10% off your first order + exclusive tips
-              </p>
-            </div>
-          </div>
-
-          {/* Shop Links */}
+    <footer className="bg-charcoal-dark border-t border-charcoal">
+      <div className="container-wide py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+          {/* Brand */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">
-              Shop
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.shop.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <img 
+              src={logoImg} 
+              alt="JM Presets" 
+              className="h-16 w-auto mb-4"
+            />
+            <p className="text-white/60 text-sm max-w-xs">
+              Premium digital backdrops and Photoshop actions for photographers who demand excellence.
+            </p>
           </div>
 
           {/* Support Links */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gold mb-4">
               Support
             </h3>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-white/60 hover:text-white transition-colors text-sm"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Company Links */}
+          {/* Legal Links */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">
-              Company
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gold mb-4">
+              Legal
             </h3>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+              {footerLinks.legal.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-white/60 hover:text-white transition-colors text-sm"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -114,30 +72,30 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Lumière. All rights reserved.
+        <div className="mt-12 pt-8 border-t border-charcoal flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-white/40">
+            © {new Date().getFullYear()} JM Presets by Jemson Bautista. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/jemsonbautista"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-white/40 hover:text-gold transition-colors"
             >
               <Instagram className="h-5 w-5" />
             </a>
             <a
-              href="https://youtube.com"
+              href="https://youtube.com/@jemsonbautista"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-white/40 hover:text-gold transition-colors"
             >
               <Youtube className="h-5 w-5" />
             </a>
             <a
-              href="mailto:hello@lumiere.com"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              href="mailto:contato@jmpresets.com"
+              className="text-white/40 hover:text-gold transition-colors"
             >
               <Mail className="h-5 w-5" />
             </a>
