@@ -86,7 +86,7 @@ export function PhotoshopActionFeatureHT() {
         <div className="text-center mt-12">
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-gold/10 border border-gold/30 rounded-full">
             <Zap className="h-5 w-5 text-gold" />
-            <span className="text-gold font-medium">Ladan GRATIS ak achte w</span>
+            <span className="text-gold font-medium">Action an Gratis ti cheri !</span>
           </div>
         </div>
       </div>
