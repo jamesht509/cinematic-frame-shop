@@ -22,6 +22,12 @@ import { HowItWorks } from '@/components/product-detail/HowItWorks';
 import { ProductFAQ } from '@/components/product-detail/ProductFAQ';
 import { CreatorSection } from '@/components/product-detail/CreatorSection';
 
+// Conversion components
+import { FloatingBuyButton } from '@/components/conversion/FloatingBuyButton';
+import { UrgencyBar } from '@/components/conversion/UrgencyBar';
+import { SectionCTA } from '@/components/conversion/SectionCTA';
+import { FinalCTA } from '@/components/conversion/FinalCTA';
+
 // The main product handle - hardcoded for single-product store
 const MAIN_PRODUCT_HANDLE = 'fine-art-backdrops-mega-pack';
 
@@ -123,6 +129,9 @@ const Index = () => {
 
   return (
     <Layout>
+      {/* Urgency Bar at Top */}
+      <UrgencyBar />
+
       {/* 1. Fullscreen Hero Slider */}
       <ProductHeroSlider
         productTitle={product?.title || 'Fine Art Backdrops Mega Pack'}
@@ -137,16 +146,47 @@ const Index = () => {
       {/* 3. Exclusive Photoshop Action Feature */}
       <PhotoshopActionFeature />
 
+      {/* CTA after Photoshop Action */}
+      <SectionCTA 
+        variant="highlight"
+        heading="Get the Photoshop Action FREE!"
+        subheading="Included with your purchase - a $97 value"
+        price={parseFloat(price).toFixed(0)}
+        onAddToCart={handleAddToCart}
+      />
+
       {/* 4. Before & After Showcase */}
       <BeforeAfterShowcase />
+
+      {/* CTA after Before/After */}
+      <SectionCTA 
+        variant="default"
+        heading="See the Magic? Get Yours Now!"
+        subheading="Join 500+ photographers creating stunning images"
+        price={parseFloat(price).toFixed(0)}
+        onAddToCart={handleAddToCart}
+      />
 
       {/* 5. Themed Gallery Sections */}
       <MaternityGallery />
       <NewbornGallery />
+      
+      {/* Mini CTA */}
+      <SectionCTA variant="minimal" price={parseFloat(price).toFixed(0)} onAddToCart={handleAddToCart} />
+
       <GraduationGallery />
       <BabyFantasyGallery />
       <HolidayGallery />
       <OverlaysBonusGallery />
+
+      {/* CTA after galleries */}
+      <SectionCTA 
+        variant="highlight"
+        heading="All These Categories Included!"
+        subheading="500+ backdrops across maternity, newborn, graduation, holidays & more"
+        price={parseFloat(price).toFixed(0)}
+        onAddToCart={handleAddToCart}
+      />
 
       {/* 6. Video Tutorials */}
       <VideoTutorials />
@@ -162,6 +202,20 @@ const Index = () => {
 
       {/* 10. Creator Section */}
       <CreatorSection />
+
+      {/* 11. Final CTA - Last Chance */}
+      <FinalCTA 
+        price={price}
+        currencyCode={currency}
+        onAddToCart={handleAddToCart}
+      />
+
+      {/* Floating Buy Button */}
+      <FloatingBuyButton 
+        price={price}
+        currencyCode={currency}
+        onAddToCart={handleAddToCart}
+      />
     </Layout>
   );
 };
