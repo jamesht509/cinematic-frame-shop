@@ -14,15 +14,15 @@ import { WhatIsIncludedHT } from '@/components/ht/WhatIsIncludedHT';
 import { VideoTutorialsHT } from '@/components/ht/VideoTutorialsHT';
 
 // Reuse non-text-heavy components from original
-import { BeforeAfterShowcase } from '@/components/product-detail/BeforeAfterShowcase';
-import { PhotoshopActionFeature } from '@/components/product-detail/PhotoshopActionFeature';
+import { BeforeAfterShowcaseHT } from '@/components/ht/BeforeAfterShowcaseHT';
+import { PhotoshopActionFeatureHT } from '@/components/ht/PhotoshopActionFeatureHT';
 import { MaternityGallery } from '@/components/product-detail/MaternityGallery';
 import { NewbornGallery } from '@/components/product-detail/NewbornGallery';
 import { GraduationGallery } from '@/components/product-detail/GraduationGallery';
 import { BabyFantasyGallery } from '@/components/product-detail/BabyFantasyGallery';
 import { HolidayGallery } from '@/components/product-detail/HolidayGallery';
 import { OverlaysBonusGallery } from '@/components/product-detail/OverlaysBonusGallery';
-import { HowItWorks } from '@/components/product-detail/HowItWorks';
+import { HowItWorksHT } from '@/components/ht/HowItWorksHT';
 import { CreatorSection } from '@/components/product-detail/CreatorSection';
 
 // Conversion components - Kreyòl versions
@@ -147,7 +147,7 @@ const IndexHT = () => {
       <FreeBonusesHT />
 
       {/* 3. Exclusive Photoshop Action Feature */}
-      <PhotoshopActionFeature />
+      <PhotoshopActionFeatureHT />
 
       {/* CTA after Photoshop Action */}
       <SectionCTAHT 
@@ -159,7 +159,7 @@ const IndexHT = () => {
       />
 
       {/* 4. Before & After Showcase */}
-      <BeforeAfterShowcase />
+      <BeforeAfterShowcaseHT />
 
       {/* CTA after Before/After */}
       <SectionCTAHT 
@@ -198,7 +198,7 @@ const IndexHT = () => {
       <WhatIsIncludedHT productTitle={product?.title || 'Fine Art Backdrops Mega Pack'} />
 
       {/* 8. How It Works */}
-      <HowItWorks />
+      <HowItWorksHT />
 
       {/* 9. FAQ */}
       <ProductFAQHT />

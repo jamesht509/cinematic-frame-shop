@@ -96,7 +96,7 @@ export const ht = {
     subtitle: "Tout sa w bezwen pou kreye imaj magic pou client ou yo.",
     items: [
       {
-        title: "100+ Digital Backdrop",
+        title: "2000+ Digital Backdrop",
         description: "High-resolution file yo nan 300 DPI, prè pou gwo print"
       },
       {
