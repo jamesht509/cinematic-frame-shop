@@ -12,7 +12,7 @@ interface SectionCTAProps {
 export function SectionCTA({ 
   variant = 'default', 
   heading = "Ready to Transform Your Photos?",
-  subheading = "Get instant access to 500+ premium backdrops",
+  subheading = "Get instant access to 2000+ premium backdrops",
   price = "49",
   onAddToCart 
 }: SectionCTAProps) {
@@ -36,7 +36,7 @@ export function SectionCTA({
     return (
       <div className="py-12 md:py-16">
         <div className="container-wide">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-gold/20 via-gold/10 to-gold/20 border border-gold/30 p-8 md:p-12">
+          <div className="relative overflow-hidden rounded-2xl bg-charcoal border border-gold/30 p-8 md:p-12">
             {/* Sparkle effects */}
             <div className="absolute top-4 left-4 text-gold/40">
               <Sparkles className="h-6 w-6" />

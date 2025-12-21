@@ -162,7 +162,7 @@ const Index = () => {
       <SectionCTA 
         variant="default"
         heading="See the Magic? Get Yours Now!"
-        subheading="Join 500+ photographers creating stunning images"
+        subheading="Join 2000+ photographers creating stunning images"
         price={parseFloat(price).toFixed(0)}
         onAddToCart={handleAddToCart}
       />
@@ -183,7 +183,7 @@ const Index = () => {
       <SectionCTA 
         variant="highlight"
         heading="All These Categories Included!"
-        subheading="500+ backdrops across maternity, newborn, graduation, holidays & more"
+        subheading="2000+ backdrops across maternity, newborn, graduation, holidays & more"
         price={parseFloat(price).toFixed(0)}
         onAddToCart={handleAddToCart}
       />
