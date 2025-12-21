@@ -29,7 +29,7 @@ const bonuses = [
   },
   {
     icon: <RefreshCw className="h-6 w-6 text-green-400" />,
-    text: "1 Year Free Updates",
+    text: "Lifetime Free Updates",
     description: "New backdrops added regularly"
   }
 ];

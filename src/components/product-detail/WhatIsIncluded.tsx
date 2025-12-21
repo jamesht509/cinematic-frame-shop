@@ -8,7 +8,7 @@ export function WhatIsIncluded({ productTitle }: WhatIsIncludedProps) {
   const items = [
     {
       icon: Image,
-      title: '100+ Digital Backdrops',
+      title: '2000+ Digital Backdrops',
       description: 'High-resolution files at 300 DPI, ready for large prints',
     },
     {
