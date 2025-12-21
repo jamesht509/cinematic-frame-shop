@@ -13,18 +13,17 @@ export const ht = {
 
   // Hero Section
   hero: {
-    socialProof: "500+ Fotografè kontan",
+    socialProof: "2000+ Fotografè kontan",
     badge: "Digital Download • Aksè touswit",
-    description: "Fè nenpòt foto vin yon chef d'oeuvre. 500+ premium digital backdrop pou maternity, newborn, graduation, holiday & plis ankò.",
+    description: "Fè nenpòt foto vin yon chef d'oeuvre. 2000+ premium digital backdrop pou maternity, newborn, graduation, holiday & plis ankò.",
     price: {
       off: "75% OFF"
     },
-    cta: "Pran Instant Access",
+    cta: "Achte l Kounye a",
     trustIndicators: {
       instantDownload: "Download touswit",
-      backdrops: "500+ Backdrop",
-      lifetime: "Aksè pou tout tan",
-      guarantee: "7-Day Garanti"
+      backdrops: "2000+ Backdrop",
+      lifetime: "Aksè pou tout tan"
     }
   },
 
@@ -56,7 +55,7 @@ export const ht = {
         description: "Pou Lightroom & Camera Raw"
       },
       {
-        text: "Step-by-Step Video Tutorial yo",
+        text: "Video Tutorial Etap pa Etap",
         description: "Soti beginner rive teknik avanse"
       },
       {
@@ -78,16 +77,16 @@ export const ht = {
       subheading: "Ladan l ak achte w — valè $97"
     },
     beforeAfter: {
-      heading: "Wè Magic la? Pran Pa w Kounye a!",
-      subheading: "Jwenn 500+ fotografè k ap kreye bèl imaj"
+      heading: "Wè Magic la? Achte l Kounye a!",
+      subheading: "Jwenn 2000+ fotografè k ap kreye bèl imaj"
     },
     galleries: {
       heading: "Tout Category sa yo ladan l!",
-      subheading: "500+ backdrop atravè maternity, newborn, graduation, holiday & plis"
+      subheading: "2000+ backdrop atravè maternity, newborn, graduation, holiday & plis"
     },
     minimal: "Jwenn Tout Sa pou Sèlman",
-    yesWant: "Wi! Mwen Vle Sa",
-    addToCart: "Add to Cart"
+    yesWant: "Wi, Mwen vle achte l kounye a",
+    addToCart: "Ajoute nan Panye"
   },
 
   // What's Included
@@ -106,7 +105,7 @@ export const ht = {
       },
       {
         title: "Video Tutorial yo",
-        description: "Step-by-step installation ak editing guide ladan l"
+        description: "Gid etap pa etap pou installation ak editing"
       },
       {
         title: "VIP Community Access",
@@ -126,21 +125,21 @@ export const ht = {
   // Video Tutorials
   tutorials: {
     badge: "🎬 VIDEO TUTORIAL YO",
-    title: "Step-by-Step Video Guide yo",
+    title: "Gid Video Etap pa Etap",
     subtitle: "Aprann tout bagay soti installation rive teknik avanse ak video tutorial konplè nou yo",
     membersOnly: "MANM SÈLMAN",
     accessNote: "Aksè tout tutorial yo touswit aprè achte",
     items: [
       {
         title: "Kijan pou Install Photoshop Action an",
-        description: "Quick setup guide pou kòmanse nan kèk minit"
+        description: "Gid setup rapid pou kòmanse nan kèk minit"
       },
       {
         title: "Aplike Premye Backdrop ou",
-        description: "Step-by-step walkthrough nan pwosesis one-click la"
+        description: "Walkthrough etap pa etap nan pwosesis ak yon klik la"
       },
       {
-        title: "Color Matching Technique yo",
+        title: "Teknik Color Matching",
         description: "Tip avanse pou seamless color blending"
       },
       {
@@ -177,15 +176,11 @@ export const ht = {
       },
       {
         question: "Kijan mwen ap resevwa file yo?",
-        answer: "Touswit aprè achte, wap resevwa yon email ak download link yo. Wap gen aksè pou tout tan pou re-download file w yo nenpòt lè w bezwen yo."
+        answer: "Touswit aprè achte, wap resevwa yon email ak download link yo. Wap gen aksè pou tout tan pou download file w yo nenpòt lè w bezwen yo."
       },
       {
         question: "Èske mwen ka itilize sa yo pou photography komèsyal?",
         answer: "Wi! Licence nou an pèmèt ou itilize background sa yo pou pwojè pèsonèl ak komèsyal. Ou ka itilize yo pou travay client, vann print, epi mete yo nan portfolio w."
-      },
-      {
-        question: "Ki policy refund ou?",
-        answer: "Nou ofri yon 7-day money-back guarantee. Si w pa satisfè ak achte w, kontakte nou nan 7 jou epi nap bay yon refund konplè, san kesyon."
       }
     ]
   },
@@ -195,31 +190,31 @@ export const ht = {
     badge: "DÈNYE CHANS • 75% OFF JODI A",
     title: "Pa Rate Chans ou pou",
     titleHighlight: "Transform Chak Foto",
-    subtitle: "Jwenn 500+ fotografè ki deja ap kreye imaj estepefyan ak premium backdrop collection nou an",
+    subtitle: "Jwenn 2000+ fotografè ki deja ap kreye imaj estepefyan ak premium backdrop collection nou an",
     valueStack: {
       title: "Men tout sa wap jwenn:",
       totalValue: "Total Value:",
       todayPrice: "Pri Jodi a:"
     },
     items: [
-      { label: "500+ Premium Backdrop", value: "$297" },
+      { label: "2000+ Premium Backdrop", value: "$297" },
       { label: "Exclusive Photoshop Action", value: "$97" },
       { label: "50+ Overlay & Texture", value: "$67" },
       { label: "Video Tutorial yo", value: "$47" },
       { label: "Lifetime Update", value: "San Pri" }
     ],
-    button: "Wi! Mwen Vle Instant Access Kounye a",
+    button: "Wi, Mwen vle achte l kounye a",
     trust: {
       instantDownload: "Download touswit",
       lifetimeAccess: "Aksè pou tout tan",
-      happyCustomers: "500+ Client kontan"
+      happyCustomers: "2000+ Client kontan"
     }
   },
 
   // Floating Buy Button
   floatingBuy: {
     limitedOffer: "Òf Limite",
-    getAccess: "Pran Instant Access",
+    getAccess: "Achte l Kounye a",
     buyNow: "Achte Kounye a"
   },
 
@@ -232,17 +227,10 @@ export const ht = {
       howToInstall: "Kijan pou Install",
       faq: "FAQ",
       contact: "Kontakte",
-      refundPolicy: "Policy Refund",
       termsOfUse: "Tèm Itilizasyon",
       privacy: "Privacy"
     },
     copyright: "© {year} JM Presets pa Jemson Bautista. Tout dwa rezève."
-  },
-
-  // Guarantee Badge
-  guarantee: {
-    title: "7 Day Money-Back Guarantee",
-    description: "Si w pa kontan, nap remèt lajan w — san kesyon."
   },
 
   // Toast messages

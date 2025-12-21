@@ -13,7 +13,7 @@ interface SectionCTAHTProps {
 export function SectionCTAHT({ 
   variant = 'default', 
   heading = "Prè pou Transform Foto w yo?",
-  subheading = "Jwenn aksè touswit pou 500+ premium backdrop",
+  subheading = "Jwenn aksè touswit pou 2000+ premium backdrop",
   price = "49",
   onAddToCart 
 }: SectionCTAHTProps) {
@@ -37,7 +37,7 @@ export function SectionCTAHT({
     return (
       <div className="py-12 md:py-16">
         <div className="container-wide">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-gold/20 via-gold/10 to-gold/20 border border-gold/30 p-8 md:p-12">
+          <div className="relative overflow-hidden rounded-2xl bg-charcoal border border-gold/30 p-8 md:p-12">
             {/* Sparkle effects */}
             <div className="absolute top-4 left-4 text-gold/40">
               <Sparkles className="h-6 w-6" />

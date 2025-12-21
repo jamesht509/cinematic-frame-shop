@@ -145,8 +145,6 @@ export function ProductHeroSliderHT({
               <span>{ht.hero.trustIndicators.backdrops}</span>
               <span>•</span>
               <span>{ht.hero.trustIndicators.lifetime}</span>
-              <span>•</span>
-              <span className="text-green-400">{ht.hero.trustIndicators.guarantee}</span>
             </div>
           </div>
         </div>

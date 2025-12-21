@@ -9,7 +9,6 @@ const footerLinks = {
     { label: ht.footer.links.contact, href: 'mailto:contato@jmpresets.com' },
   ],
   legal: [
-    { label: ht.footer.links.refundPolicy, href: '#' },
     { label: ht.footer.links.termsOfUse, href: '#' },
     { label: ht.footer.links.privacy, href: '#' },
   ],
