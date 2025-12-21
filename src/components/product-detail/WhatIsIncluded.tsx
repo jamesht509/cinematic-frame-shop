@@ -39,7 +39,7 @@ export function WhatIsIncluded({ productTitle }: WhatIsIncludedProps) {
   ];
 
   return (
-    <section className="py-16 bg-muted/30">
+    <section id="whats-included" className="py-16 bg-muted/30 scroll-mt-24">
       <div className="container-wide">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-serif font-semibold text-foreground mb-4">

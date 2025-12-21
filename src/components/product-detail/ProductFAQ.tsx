@@ -34,7 +34,7 @@ export function ProductFAQ() {
   ];
 
   return (
-    <section className="py-16 bg-background">
+    <section id="faq" className="py-16 bg-background scroll-mt-24">
       <div className="container-wide max-w-3xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-serif font-semibold text-foreground mb-4">
