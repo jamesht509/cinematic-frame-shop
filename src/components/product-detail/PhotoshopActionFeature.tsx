@@ -1,4 +1,5 @@
 import { Zap, Clock, Target, Lightbulb, Wand2 } from 'lucide-react';
+import { VideoPlayer } from '@/components/ui/VideoPlayer';
 
 const features = [
   {
@@ -71,15 +72,13 @@ export function PhotoshopActionFeature() {
           ))}
         </div>
 
-        {/* Video placeholder area */}
+        {/* Video Player */}
         <div className="max-w-4xl mx-auto">
-          <div className="aspect-video bg-gradient-to-br from-charcoal to-black rounded-2xl border-2 border-dashed border-gold/30 flex flex-col items-center justify-center">
-            <div className="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mb-4">
-              <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-gold border-b-[12px] border-b-transparent ml-1" />
-            </div>
-            <p className="text-gold font-medium mb-1">Demo Video Coming Soon</p>
-            <p className="text-white/40 text-sm">See the Photoshop Action in action</p>
-          </div>
+          <VideoPlayer 
+            videoId="HrC0-ubPMaI"
+            soundText="🔊 CLICK TO ENABLE SOUND 🔊"
+            watchText="Watch the Magic"
+          />
         </div>
 
         {/* Bottom highlight */}
