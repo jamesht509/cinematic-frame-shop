@@ -5,7 +5,7 @@ const META_API_VERSION = "v18.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-forwarded-for, x-real-ip',
 };
 
 interface MetaEvent {
@@ -17,10 +17,11 @@ interface MetaEvent {
   user_data: {
     client_ip_address?: string;
     client_user_agent?: string;
-    fbc?: string;
-    fbp?: string;
+    fbc?: string | null;
+    fbp?: string | null;
     em?: string[];
     ph?: string[];
+    external_id?: string[];
   };
   custom_data?: {
     currency?: string;
@@ -32,6 +33,41 @@ interface MetaEvent {
     num_items?: number;
   };
 }
+
+// Get client IP from various headers
+const getClientIp = (req: Request): string => {
+  // Check various headers for the real client IP
+  const forwardedFor = req.headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    // x-forwarded-for can contain multiple IPs, take the first one
+    return forwardedFor.split(',')[0].trim();
+  }
+  
+  const realIp = req.headers.get('x-real-ip');
+  if (realIp) {
+    return realIp;
+  }
+  
+  const cfConnectingIp = req.headers.get('cf-connecting-ip');
+  if (cfConnectingIp) {
+    return cfConnectingIp;
+  }
+  
+  // Fallback - this might not be the real IP behind proxies
+  return req.headers.get('host')?.split(':')[0] || '0.0.0.0';
+};
+
+// Generate a simple hash for external_id (for better matching without PII)
+const generateExternalId = (userAgent: string, ip: string): string => {
+  const data = `${userAgent}_${ip}_${new Date().toISOString().split('T')[0]}`;
+  let hash = 0;
+  for (let i = 0; i < data.length; i++) {
+    const char = data.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return Math.abs(hash).toString(36);
+};
 
 serve(async (req) => {
   // Handle CORS preflight
@@ -60,12 +96,30 @@ serve(async (req) => {
       );
     }
 
-    // Add server-side data to events
-    const enrichedEvents = events.map(event => ({
-      ...event,
-      event_time: event.event_time || Math.floor(Date.now() / 1000),
-      action_source: event.action_source || 'website',
-    }));
+    // Get client IP from request headers
+    const clientIp = getClientIp(req);
+    console.log('Client IP detected:', clientIp);
+
+    // Enrich events with server-side data
+    const enrichedEvents = events.map(event => {
+      const userAgent = event.user_data?.client_user_agent || req.headers.get('user-agent') || '';
+      const externalId = generateExternalId(userAgent, clientIp);
+      
+      return {
+        ...event,
+        event_time: event.event_time || Math.floor(Date.now() / 1000),
+        action_source: event.action_source || 'website',
+        user_data: {
+          ...event.user_data,
+          client_ip_address: clientIp,
+          client_user_agent: userAgent,
+          external_id: [externalId],
+          // Remove null values
+          fbc: event.user_data?.fbc || undefined,
+          fbp: event.user_data?.fbp || undefined,
+        },
+      };
+    });
 
     const payload = {
       data: enrichedEvents,
@@ -73,6 +127,12 @@ serve(async (req) => {
     };
 
     console.log(`Sending ${enrichedEvents.length} event(s) to Meta Conversions API`);
+    console.log('Event details:', JSON.stringify(enrichedEvents.map(e => ({
+      event_name: e.event_name,
+      has_ip: !!e.user_data.client_ip_address,
+      has_ua: !!e.user_data.client_user_agent,
+      has_external_id: !!e.user_data.external_id,
+    }))));
 
     const response = await fetch(
       `https://graph.facebook.com/${META_API_VERSION}/${META_PIXEL_ID}/events`,
@@ -95,7 +155,7 @@ serve(async (req) => {
       );
     }
 
-    console.log('Meta API response:', result);
+    console.log('Meta API success:', result);
 
     return new Response(
       JSON.stringify({ success: true, result }),

@@ -2,6 +2,7 @@ import { X, Plus, Minus, Trash2, ExternalLink, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore, useCartSubtotal } from '@/stores/cartStore';
 import { FreeShippingBar } from './FreeShippingBar';
+import { trackInitiateCheckout } from '@/lib/metaPixel';
 
 export function CartDrawer() {
   const {
@@ -16,6 +17,11 @@ export function CartDrawer() {
   const subtotal = useCartSubtotal();
 
   const handleCheckout = async () => {
+    // Track InitiateCheckout event
+    const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+    const contentIds = items.map(item => item.product.node.id);
+    trackInitiateCheckout(subtotal, totalItems, contentIds);
+    
     const checkoutUrl = await createCheckout();
     if (checkoutUrl) {
       window.open(checkoutUrl, '_blank');

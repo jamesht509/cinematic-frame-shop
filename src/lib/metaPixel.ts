@@ -9,9 +9,11 @@ const generateEventId = () => {
 
 // Get Facebook cookies
 const getFbCookies = () => {
+  if (typeof document === 'undefined') return { fbc: null, fbp: null };
+  
   const cookies = document.cookie.split(';').reduce((acc, cookie) => {
     const [key, value] = cookie.trim().split('=');
-    acc[key] = value;
+    if (key) acc[key] = value;
     return acc;
   }, {} as Record<string, string>);
 
@@ -48,6 +50,8 @@ export const initMetaPixel = () => {
 
   (window as any).fbq('init', META_PIXEL_ID);
   (window as any).fbq('track', 'PageView');
+  
+  console.log('Meta Pixel initialized with ID:', META_PIXEL_ID);
 };
 
 // Track event (both client and server-side)
@@ -61,25 +65,29 @@ export const trackEvent = async (
     content_ids?: string[];
     content_type?: string;
     num_items?: number;
+    order_id?: string;
   }
 ) => {
+  if (typeof window === 'undefined') return;
+  
   const eventId = generateEventId();
   const { fbc, fbp } = getFbCookies();
 
   // Client-side tracking
-  if (typeof window !== 'undefined' && (window as any).fbq) {
+  if ((window as any).fbq) {
     (window as any).fbq('track', eventName, customData, { eventID: eventId });
+    console.log(`[Meta Pixel] Client-side ${eventName} event sent`);
   }
 
-  // Server-side tracking via Edge Function
+  // Server-side tracking via Edge Function (for better match rate)
   try {
-    const { error } = await supabase.functions.invoke('meta-conversions', {
+    const { data, error } = await supabase.functions.invoke('meta-conversions', {
       body: {
         events: [{
           event_name: eventName,
           event_time: Math.floor(Date.now() / 1000),
           event_id: eventId,
-          event_source_url: window.location.href,
+          event_source_url: window.location.href.split('?')[0], // Remove query params
           action_source: 'website',
           user_data: {
             client_user_agent: navigator.userAgent,
@@ -92,22 +100,85 @@ export const trackEvent = async (
     });
 
     if (error) {
-      console.error('Server-side tracking error:', error);
+      console.error('[Meta CAPI] Server-side tracking error:', error);
+    } else {
+      console.log(`[Meta CAPI] Server-side ${eventName} event sent successfully`);
     }
   } catch (err) {
-    console.error('Failed to send server-side event:', err);
+    console.error('[Meta CAPI] Failed to send server-side event:', err);
   }
 };
 
 // Standard events
 export const trackPageView = () => trackEvent('PageView');
+
 export const trackViewContent = (contentName: string, contentCategory?: string, value?: number) => 
-  trackEvent('ViewContent', { content_name: contentName, content_category: contentCategory, value, currency: 'USD' });
+  trackEvent('ViewContent', { 
+    content_name: contentName, 
+    content_category: contentCategory, 
+    value, 
+    currency: 'USD' 
+  });
+
 export const trackAddToCart = (contentIds: string[], value: number, numItems: number = 1) => 
-  trackEvent('AddToCart', { content_ids: contentIds, value, currency: 'USD', num_items: numItems, content_type: 'product' });
-export const trackInitiateCheckout = (value: number, numItems: number) => 
-  trackEvent('InitiateCheckout', { value, currency: 'USD', num_items: numItems });
-export const trackPurchase = (contentIds: string[], value: number, numItems: number) => 
-  trackEvent('Purchase', { content_ids: contentIds, value, currency: 'USD', num_items: numItems, content_type: 'product' });
+  trackEvent('AddToCart', { 
+    content_ids: contentIds, 
+    value, 
+    currency: 'USD', 
+    num_items: numItems, 
+    content_type: 'product' 
+  });
+
+export const trackInitiateCheckout = (value: number, numItems: number, contentIds?: string[]) => 
+  trackEvent('InitiateCheckout', { 
+    value, 
+    currency: 'USD', 
+    num_items: numItems,
+    content_ids: contentIds,
+    content_type: 'product'
+  });
+
+export const trackPurchase = (contentIds: string[], value: number, numItems: number, orderId?: string) => 
+  trackEvent('Purchase', { 
+    content_ids: contentIds, 
+    value, 
+    currency: 'USD', 
+    num_items: numItems, 
+    content_type: 'product',
+    order_id: orderId
+  });
+
 export const trackLead = () => trackEvent('Lead');
 export const trackContact = () => trackEvent('Contact');
+
+// Check if pixel is properly loaded
+export const isPixelLoaded = (): boolean => {
+  return typeof window !== 'undefined' && !!(window as any).fbq;
+};
+
+// Debug function to verify pixel installation
+export const debugPixelInstallation = () => {
+  if (typeof window === 'undefined') {
+    console.log('[Meta Pixel Debug] Not in browser environment');
+    return;
+  }
+  
+  const fbq = (window as any).fbq;
+  const cookies = getFbCookies();
+  
+  console.log('[Meta Pixel Debug] ==================');
+  console.log('[Meta Pixel Debug] Pixel ID:', META_PIXEL_ID);
+  console.log('[Meta Pixel Debug] fbq loaded:', !!fbq);
+  console.log('[Meta Pixel Debug] fbq version:', fbq?.version);
+  console.log('[Meta Pixel Debug] _fbc cookie:', cookies.fbc);
+  console.log('[Meta Pixel Debug] _fbp cookie:', cookies.fbp);
+  console.log('[Meta Pixel Debug] Current URL:', window.location.href);
+  console.log('[Meta Pixel Debug] ==================');
+  
+  return {
+    pixelId: META_PIXEL_ID,
+    isLoaded: !!fbq,
+    version: fbq?.version,
+    cookies,
+  };
+};
