@@ -77,7 +77,6 @@ export function PhotoshopActionFeatureHT() {
           <VideoPlayer 
             videoId="HrC0-ubPMaI"
             soundText="🔊 KLIKE POU AKTIVE SON 🔊"
-            watchText="Gade Majik la"
           />
         </div>
 
