@@ -5,6 +5,8 @@ import { useCartStore } from '@/stores/cartStore';
 import { fetchProductByHandle } from '@/lib/shopify';
 import { toast } from 'sonner';
 import { ht } from '@/locales/ht/translations';
+import { trackAddToCart, trackViewContent } from '@/lib/metaPixel';
+import { SEOHead } from '@/components/SEOHead';
 
 // Product sections - Kreyòl versions
 import { ProductHeroSliderHT } from '@/components/ht/ProductHeroSliderHT';
@@ -87,6 +89,15 @@ const IndexHT = () => {
         setLoading(true);
         const data = await fetchProductByHandle(MAIN_PRODUCT_HANDLE);
         setProduct(data);
+        
+        // Track ViewContent when product loads
+        if (data) {
+          trackViewContent(
+            data.title,
+            'Photography Backdrops',
+            parseFloat(data.priceRange.minVariantPrice.amount)
+          );
+        }
       } catch (err) {
         console.error('Failed to load product:', err);
       } finally {
@@ -111,6 +122,13 @@ const IndexHT = () => {
       selectedOptions: variant.selectedOptions,
     });
     
+    // Track AddToCart event
+    trackAddToCart(
+      [product.id],
+      parseFloat(variant.price.amount),
+      1
+    );
+    
     toast.success(ht.toast.addedToCart, {
       description: product.title,
       position: 'top-center',
@@ -132,6 +150,11 @@ const IndexHT = () => {
 
   return (
     <LayoutHT>
+      <SEOHead 
+        title="Fon Dijital & Aksyon Photoshop pou Fotograf"
+        description="Fon dijital pwofesyonèl ak aksyon Photoshop pou fotograf. Transfòme foto ou ak fon magnifik."
+        lang="ht"
+      />
       {/* Urgency Bar at Top */}
       <UrgencyBarHT />
 

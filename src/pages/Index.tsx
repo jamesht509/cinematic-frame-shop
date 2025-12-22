@@ -4,6 +4,8 @@ import { Layout } from '@/components/layout/Layout';
 import { useCartStore } from '@/stores/cartStore';
 import { fetchProductByHandle } from '@/lib/shopify';
 import { toast } from 'sonner';
+import { trackAddToCart, trackViewContent } from '@/lib/metaPixel';
+import { SEOHead } from '@/components/SEOHead';
 
 // Product sections
 import { ProductHeroSlider } from '@/components/product-detail/ProductHeroSlider';
@@ -84,6 +86,15 @@ const Index = () => {
         setLoading(true);
         const data = await fetchProductByHandle(MAIN_PRODUCT_HANDLE);
         setProduct(data);
+        
+        // Track ViewContent when product loads
+        if (data) {
+          trackViewContent(
+            data.title,
+            'Photography Backdrops',
+            parseFloat(data.priceRange.minVariantPrice.amount)
+          );
+        }
       } catch (err) {
         console.error('Failed to load product:', err);
       } finally {
@@ -108,6 +119,13 @@ const Index = () => {
       selectedOptions: variant.selectedOptions,
     });
     
+    // Track AddToCart event
+    trackAddToCart(
+      [product.id],
+      parseFloat(variant.price.amount),
+      1
+    );
+    
     toast.success('Added to cart!', {
       description: product.title,
       position: 'top-center',
@@ -129,6 +147,11 @@ const Index = () => {
 
   return (
     <Layout>
+      <SEOHead 
+        title="Digital Backgrounds & Photoshop Actions for Photographers"
+        description="Professional digital backgrounds & Photoshop actions for photographers. Transform your photos with stunning backdrops."
+        lang="en"
+      />
       {/* Urgency Bar at Top */}
       <UrgencyBar />
 
