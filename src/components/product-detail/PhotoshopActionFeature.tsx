@@ -77,7 +77,6 @@ export function PhotoshopActionFeature() {
           <VideoPlayer 
             videoId="HrC0-ubPMaI"
             soundText="🔊 CLICK TO ENABLE SOUND 🔊"
-            watchText="Watch the Magic"
           />
         </div>
 
