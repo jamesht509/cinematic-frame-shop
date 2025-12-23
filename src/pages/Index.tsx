@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
-import { createCheckoutSession } from '@/lib/stripe';
 import { toast } from 'sonner';
 import { trackAddToCart, trackViewContent } from '@/lib/metaPixel';
 import { SEOHead } from '@/components/SEOHead';
+import { EmbeddedCheckoutModal } from '@/components/checkout/EmbeddedCheckoutModal';
 
 // Product sections
 import { ProductHeroSlider } from '@/components/product-detail/ProductHeroSlider';
@@ -38,6 +38,8 @@ const PRODUCT_CONFIG = {
 };
 
 const Index = () => {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
   // Track view on mount
   useEffect(() => {
     trackViewContent(
@@ -47,33 +49,16 @@ const Index = () => {
     );
   }, []);
 
-  const handleBuyNow = async () => {
-    try {
-      // Track AddToCart event
-      trackAddToCart(
-        [PRODUCT_CONFIG.id],
-        parseFloat(PRODUCT_CONFIG.price),
-        1
-      );
+  const handleBuyNow = () => {
+    // Track AddToCart event
+    trackAddToCart(
+      [PRODUCT_CONFIG.id],
+      parseFloat(PRODUCT_CONFIG.price),
+      1
+    );
 
-      toast.loading('Redirecting to checkout...', { id: 'checkout' });
-
-      const checkoutUrl = await createCheckoutSession({
-        priceId: PRODUCT_CONFIG.priceId,
-        productId: PRODUCT_CONFIG.id,
-      });
-
-      // Open checkout in new tab
-      window.open(checkoutUrl, '_blank');
-      
-      toast.success('Checkout opened!', { 
-        id: 'checkout',
-        position: 'top-center',
-      });
-    } catch (error) {
-      console.error('Checkout error:', error);
-      toast.error('Error creating checkout. Please try again.', { id: 'checkout' });
-    }
+    // Open embedded checkout modal
+    setIsCheckoutOpen(true);
   };
 
   return (
@@ -82,6 +67,14 @@ const Index = () => {
         title="Digital Backgrounds & Photoshop Actions for Photographers"
         description="Professional digital backgrounds & Photoshop actions for photographers. Transform your photos with stunning backdrops."
         lang="en"
+      />
+
+      {/* Embedded Checkout Modal */}
+      <EmbeddedCheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        priceId={PRODUCT_CONFIG.priceId}
+        productId={PRODUCT_CONFIG.id}
       />
 
       {/* Urgency Bar at Top */}
