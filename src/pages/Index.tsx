@@ -31,7 +31,7 @@ import { SectionCTA } from '@/components/conversion/SectionCTA';
 import { FinalCTA } from '@/components/conversion/FinalCTA';
 
 // The main product handle - hardcoded for single-product store
-const MAIN_PRODUCT_HANDLE = 'fine-art-backdrops-mega-pack';
+const MAIN_PRODUCT_HANDLE = 'cinematic-portrait-presets';
 
 interface ProductNode {
   id: string;

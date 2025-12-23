@@ -34,7 +34,7 @@ import { SectionCTAHT } from '@/components/ht/SectionCTAHT';
 import { FinalCTAHT } from '@/components/ht/FinalCTAHT';
 
 // The main product handle - hardcoded for single-product store
-const MAIN_PRODUCT_HANDLE = 'fine-art-backdrops-mega-pack';
+const MAIN_PRODUCT_HANDLE = 'cinematic-portrait-presets';
 
 interface ProductNode {
   id: string;
