@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { LayoutHT } from '@/components/ht/LayoutHT';
-import { createCheckoutSession } from '@/lib/stripe';
 import { toast } from 'sonner';
 import { ht } from '@/locales/ht/translations';
 import { trackAddToCart, trackViewContent } from '@/lib/metaPixel';
 import { SEOHead } from '@/components/SEOHead';
+import { EmbeddedCheckoutModal } from '@/components/checkout/EmbeddedCheckoutModal';
 
 // Product sections - Kreyòl versions
 import { ProductHeroSliderHT } from '@/components/ht/ProductHeroSliderHT';
@@ -41,6 +41,8 @@ const PRODUCT_CONFIG = {
 };
 
 const IndexHT = () => {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
   // Track view on mount
   useEffect(() => {
     trackViewContent(
@@ -50,33 +52,16 @@ const IndexHT = () => {
     );
   }, []);
 
-  const handleBuyNow = async () => {
-    try {
-      // Track AddToCart event
-      trackAddToCart(
-        [PRODUCT_CONFIG.id],
-        parseFloat(PRODUCT_CONFIG.price),
-        1
-      );
+  const handleBuyNow = () => {
+    // Track AddToCart event
+    trackAddToCart(
+      [PRODUCT_CONFIG.id],
+      parseFloat(PRODUCT_CONFIG.price),
+      1
+    );
 
-      toast.loading('Redireksyon nan checkout...', { id: 'checkout' });
-
-      const checkoutUrl = await createCheckoutSession({
-        priceId: PRODUCT_CONFIG.priceId,
-        productId: PRODUCT_CONFIG.id,
-      });
-
-      // Open checkout in new tab
-      window.open(checkoutUrl, '_blank');
-      
-      toast.success('Checkout louvri!', { 
-        id: 'checkout',
-        position: 'top-center',
-      });
-    } catch (error) {
-      console.error('Checkout error:', error);
-      toast.error('Erè pandan kreyasyon checkout. Eseye ankò.', { id: 'checkout' });
-    }
+    // Open embedded checkout modal
+    setIsCheckoutOpen(true);
   };
 
   return (
@@ -86,6 +71,15 @@ const IndexHT = () => {
         description="Fon dijital pwofesyonèl ak aksyon Photoshop pou fotograf. Transfòme foto ou ak fon magnifik."
         lang="ht"
       />
+
+      {/* Embedded Checkout Modal */}
+      <EmbeddedCheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        priceId={PRODUCT_CONFIG.priceId}
+        productId={PRODUCT_CONFIG.id}
+      />
+
       {/* Urgency Bar at Top */}
       <UrgencyBarHT />
 
