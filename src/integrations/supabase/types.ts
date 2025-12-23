@@ -14,12 +14,46 @@ export type Database = {
   }
   public: {
     Tables: {
+      product_protected_content: {
+        Row: {
+          created_at: string | null
+          download_url: string | null
+          id: string
+          product_id: string
+          video_tutorial_url: string | null
+          whatsapp_group_url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          download_url?: string | null
+          id?: string
+          product_id: string
+          video_tutorial_url?: string | null
+          whatsapp_group_url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          download_url?: string | null
+          id?: string
+          product_id?: string
+          video_tutorial_url?: string | null
+          whatsapp_group_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_protected_content_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: true
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       products: {
         Row: {
           created_at: string | null
           currency: string | null
           description: string | null
-          download_url: string | null
           id: string
           image_url: string | null
           is_active: boolean | null
@@ -27,14 +61,11 @@ export type Database = {
           price: number
           stripe_price_id: string | null
           updated_at: string | null
-          video_tutorial_url: string | null
-          whatsapp_group_url: string | null
         }
         Insert: {
           created_at?: string | null
           currency?: string | null
           description?: string | null
-          download_url?: string | null
           id?: string
           image_url?: string | null
           is_active?: boolean | null
@@ -42,14 +73,11 @@ export type Database = {
           price: number
           stripe_price_id?: string | null
           updated_at?: string | null
-          video_tutorial_url?: string | null
-          whatsapp_group_url?: string | null
         }
         Update: {
           created_at?: string | null
           currency?: string | null
           description?: string | null
-          download_url?: string | null
           id?: string
           image_url?: string | null
           is_active?: boolean | null
@@ -57,8 +85,6 @@ export type Database = {
           price?: number
           stripe_price_id?: string | null
           updated_at?: string | null
-          video_tutorial_url?: string | null
-          whatsapp_group_url?: string | null
         }
         Relationships: []
       }
