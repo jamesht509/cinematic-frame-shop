@@ -6,19 +6,24 @@ import { supabase } from "@/integrations/supabase/client";
 import { Download, MessageCircle, Video, LogOut, Home, Loader2, Package } from "lucide-react";
 import { toast } from "sonner";
 
+interface ProductProtectedContent {
+  download_url: string | null;
+  whatsapp_group_url: string | null;
+  video_tutorial_url: string | null;
+}
+
 interface Purchase {
   id: string;
   purchased_at: string;
   amount: number;
   currency: string;
   status: string;
+  product_id: string | null;
   products: {
     name: string;
-    download_url: string | null;
-    whatsapp_group_url: string | null;
-    video_tutorial_url: string | null;
     image_url: string | null;
   } | null;
+  protectedContent?: ProductProtectedContent | null;
 }
 
 export default function MyPurchase() {
@@ -58,8 +63,8 @@ export default function MyPurchase() {
     if (!userId) return;
 
     try {
-      // Query by user_id (matches RLS policy) instead of customer_email
-      const { data, error } = await supabase
+      // Query purchases with product info
+      const { data: purchasesData, error: purchasesError } = await supabase
         .from("purchases")
         .select(`
           id,
@@ -67,11 +72,9 @@ export default function MyPurchase() {
           amount,
           currency,
           status,
+          product_id,
           products (
             name,
-            download_url,
-            whatsapp_group_url,
-            video_tutorial_url,
             image_url
           )
         `)
@@ -79,8 +82,29 @@ export default function MyPurchase() {
         .eq("status", "completed")
         .order("purchased_at", { ascending: false });
 
-      if (error) throw error;
-      setPurchases(data || []);
+      if (purchasesError) throw purchasesError;
+
+      // Fetch protected content for each purchase (RLS will only return content user has access to)
+      const purchasesWithContent: Purchase[] = await Promise.all(
+        (purchasesData || []).map(async (purchase) => {
+          if (!purchase.product_id) {
+            return { ...purchase, protectedContent: null };
+          }
+
+          const { data: protectedData } = await supabase
+            .from("product_protected_content")
+            .select("download_url, whatsapp_group_url, video_tutorial_url")
+            .eq("product_id", purchase.product_id)
+            .single();
+
+          return {
+            ...purchase,
+            protectedContent: protectedData || null,
+          };
+        })
+      );
+
+      setPurchases(purchasesWithContent);
     } catch (error) {
       console.error("Error fetching purchases:", error);
       toast.error("Error loading your purchases");
@@ -161,25 +185,25 @@ export default function MyPurchase() {
                     </CardHeader>
                     <CardContent className="p-0">
                       <div className="flex flex-wrap gap-2">
-                        {purchase.products?.download_url && (
+                        {purchase.protectedContent?.download_url && (
                           <Button asChild size="sm" className="bg-green-600 hover:bg-green-700">
-                            <a href={purchase.products.download_url} target="_blank" rel="noopener noreferrer">
+                            <a href={purchase.protectedContent.download_url} target="_blank" rel="noopener noreferrer">
                               <Download className="h-4 w-4 mr-2" />
                               Download Files
                             </a>
                           </Button>
                         )}
-                        {purchase.products?.video_tutorial_url && (
+                        {purchase.protectedContent?.video_tutorial_url && (
                           <Button asChild variant="outline" size="sm">
-                            <a href={purchase.products.video_tutorial_url} target="_blank" rel="noopener noreferrer">
+                            <a href={purchase.protectedContent.video_tutorial_url} target="_blank" rel="noopener noreferrer">
                               <Video className="h-4 w-4 mr-2" />
                               Tutorial
                             </a>
                           </Button>
                         )}
-                        {purchase.products?.whatsapp_group_url && (
+                        {purchase.protectedContent?.whatsapp_group_url && (
                           <Button asChild variant="outline" size="sm">
-                            <a href={purchase.products.whatsapp_group_url} target="_blank" rel="noopener noreferrer">
+                            <a href={purchase.protectedContent.whatsapp_group_url} target="_blank" rel="noopener noreferrer">
                               <MessageCircle className="h-4 w-4 mr-2" />
                               WhatsApp
                             </a>
