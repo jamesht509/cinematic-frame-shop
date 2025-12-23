@@ -46,6 +46,7 @@ serve(async (req) => {
         mode: "payment",
         ui_mode: "embedded",
         return_url: `${origin}/sucesso?session_id={CHECKOUT_SESSION_ID}`,
+        allow_promotion_codes: true,
         metadata: {
           productId: productId || '',
         },
@@ -73,6 +74,7 @@ serve(async (req) => {
         success_url: `${origin}/sucesso?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${origin}/`,
         billing_address_collection: 'auto',
+        allow_promotion_codes: true,
         metadata: {
           productId: productId || '',
         },
