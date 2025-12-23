@@ -23,34 +23,20 @@ serve(async (req) => {
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
 
-    const { priceId, productId, customerEmail, customerName } = await req.json();
-    logStep("Request data", { priceId, productId, customerEmail, customerName });
+    const { priceId, productId } = await req.json();
+    logStep("Request data", { priceId, productId });
 
-    if (!priceId || !customerEmail) {
-      throw new Error("Missing required fields: priceId and customerEmail");
+    if (!priceId) {
+      throw new Error("Missing required field: priceId");
     }
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
 
-    // Check if customer exists
-    const customers = await stripe.customers.list({ email: customerEmail, limit: 1 });
-    let customerId;
-    if (customers.data.length > 0) {
-      customerId = customers.data[0].id;
-      logStep("Found existing customer", { customerId });
-    } else {
-      const customer = await stripe.customers.create({
-        email: customerEmail,
-        name: customerName,
-      });
-      customerId = customer.id;
-      logStep("Created new customer", { customerId });
-    }
-
     const origin = req.headers.get("origin") || "https://lovable.dev";
 
+    // Create checkout session without pre-setting customer
+    // Stripe Checkout will collect email and all customer info
     const session = await stripe.checkout.sessions.create({
-      customer: customerId,
       line_items: [
         {
           price: priceId,
@@ -60,10 +46,10 @@ serve(async (req) => {
       mode: "payment",
       success_url: `${origin}/sucesso?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/`,
+      // Let Stripe collect customer info for higher conversion
+      billing_address_collection: 'auto',
       metadata: {
-        productId,
-        customerEmail,
-        customerName,
+        productId: productId || '',
       },
     });
 

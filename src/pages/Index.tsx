@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { useEffect } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { createCheckoutSession } from '@/lib/stripe';
 import { toast } from 'sonner';
@@ -39,32 +38,16 @@ const PRODUCT_CONFIG = {
 };
 
 const Index = () => {
-  const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
-  const [checkoutEmail, setCheckoutEmail] = useState('');
-  const [checkoutName, setCheckoutName] = useState('');
-  const [showEmailModal, setShowEmailModal] = useState(false);
-
   // Track view on mount
-  useState(() => {
+  useEffect(() => {
     trackViewContent(
       PRODUCT_CONFIG.title,
       'Photography Backdrops',
       parseFloat(PRODUCT_CONFIG.price)
     );
-  });
+  }, []);
 
-  const handleBuyNow = () => {
-    setShowEmailModal(true);
-  };
-
-  const handleCheckout = async () => {
-    if (!checkoutEmail) {
-      toast.error('Por favor, insira seu email');
-      return;
-    }
-
-    setIsCheckoutLoading(true);
-    
+  const handleBuyNow = async () => {
     try {
       // Track AddToCart event
       trackAddToCart(
@@ -73,25 +56,23 @@ const Index = () => {
         1
       );
 
+      toast.loading('Redirecting to checkout...', { id: 'checkout' });
+
       const checkoutUrl = await createCheckoutSession({
         priceId: PRODUCT_CONFIG.priceId,
         productId: PRODUCT_CONFIG.id,
-        customerEmail: checkoutEmail,
-        customerName: checkoutName,
       });
 
       // Open checkout in new tab
       window.open(checkoutUrl, '_blank');
-      setShowEmailModal(false);
       
-      toast.success('Redirecionando para o checkout...', {
+      toast.success('Checkout opened!', { 
+        id: 'checkout',
         position: 'top-center',
       });
     } catch (error) {
       console.error('Checkout error:', error);
-      toast.error('Erro ao criar checkout. Tente novamente.');
-    } finally {
-      setIsCheckoutLoading(false);
+      toast.error('Error creating checkout. Please try again.', { id: 'checkout' });
     }
   };
 
@@ -102,71 +83,6 @@ const Index = () => {
         description="Professional digital backgrounds & Photoshop actions for photographers. Transform your photos with stunning backdrops."
         lang="en"
       />
-      
-      {/* Email Modal */}
-      {showEmailModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-          <div className="bg-background rounded-2xl p-6 max-w-md w-full shadow-2xl">
-            <h3 className="text-2xl font-bold mb-2">Complete Your Purchase</h3>
-            <p className="text-muted-foreground mb-6">
-              Enter your email to receive your download link
-            </p>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">Name</label>
-                <input
-                  type="text"
-                  value={checkoutName}
-                  onChange={(e) => setCheckoutName(e.target.value)}
-                  placeholder="Your name"
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium mb-2">Email *</label>
-                <input
-                  type="email"
-                  value={checkoutEmail}
-                  onChange={(e) => setCheckoutEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-                />
-              </div>
-              
-              <button
-                onClick={handleCheckout}
-                disabled={isCheckoutLoading}
-                className="w-full bg-gold hover:bg-gold-light text-charcoal-dark font-bold py-4 rounded-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                {isCheckoutLoading ? (
-                  <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    Proceed to Checkout - ${PRODUCT_CONFIG.price}
-                  </>
-                )}
-              </button>
-              
-              <button
-                onClick={() => setShowEmailModal(false)}
-                className="w-full text-muted-foreground hover:text-foreground py-2 transition-colors"
-              >
-                Cancel
-              </button>
-            </div>
-            
-            <p className="text-xs text-muted-foreground mt-4 text-center">
-              🔒 Secure checkout powered by Stripe
-            </p>
-          </div>
-        </div>
-      )}
 
       {/* Urgency Bar at Top */}
       <UrgencyBar />
