@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MetaPixelProvider } from "@/components/MetaPixelProvider";
 import Index from "./pages/Index";
 import IndexHT from "./pages/IndexHT";
+import ThankYouPDFPage from "./pages/ThankYouPDFPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/ht" element={<IndexHT />} />
+            <Route path="/thank-you-pdf" element={<ThankYouPDFPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </MetaPixelProvider>
