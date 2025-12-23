@@ -32,14 +32,14 @@ export default function Login() {
 
       if (error) throw error;
 
-      toast.success("Login realizado com sucesso!");
+      toast.success("Login successful!");
       navigate(from, { replace: true });
     } catch (error: any) {
       console.error("Login error:", error);
       if (error.message?.includes("Invalid login credentials")) {
-        toast.error("Email ou senha incorretos");
+        toast.error("Incorrect email or password");
       } else {
-        toast.error(error.message || "Erro ao fazer login");
+        toast.error(error.message || "Error logging in");
       }
     } finally {
       setIsLoading(false);
@@ -66,13 +66,13 @@ export default function Login() {
 
       if (error) throw error;
 
-      toast.success("Conta criada com sucesso! Você já pode fazer login.");
+      toast.success("Account created successfully! You can now log in.");
     } catch (error: any) {
       console.error("Signup error:", error);
       if (error.message?.includes("already registered")) {
-        toast.error("Este email já está cadastrado");
+        toast.error("This email is already registered");
       } else {
-        toast.error(error.message || "Erro ao criar conta");
+        toast.error(error.message || "Error creating account");
       }
     } finally {
       setIsLoading(false);
@@ -84,22 +84,22 @@ export default function Login() {
       <div className="w-full max-w-md">
         <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors">
           <ArrowLeft className="h-4 w-4" />
-          Voltar para a loja
+          Back to Store
         </Link>
 
         <Card className="border-border/50 shadow-xl">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">Minha Conta</CardTitle>
+            <CardTitle className="text-2xl font-bold">My Account</CardTitle>
             <CardDescription>
-              Acesse seus produtos ou crie uma nova conta
+              Access your products or create a new account
             </CardDescription>
           </CardHeader>
 
           <CardContent>
             <Tabs defaultValue="login" className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="login">Entrar</TabsTrigger>
-                <TabsTrigger value="signup">Criar Conta</TabsTrigger>
+                <TabsTrigger value="login">Login</TabsTrigger>
+                <TabsTrigger value="signup">Sign Up</TabsTrigger>
               </TabsList>
 
               <TabsContent value="login">
@@ -111,7 +111,7 @@ export default function Login() {
                       <Input
                         id="login-email"
                         type="email"
-                        placeholder="seu@email.com"
+                        placeholder="your@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="pl-10"
@@ -121,7 +121,7 @@ export default function Login() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="login-password">Senha</Label>
+                    <Label htmlFor="login-password">Password</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
@@ -141,10 +141,10 @@ export default function Login() {
                     {isLoading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Entrando...
+                        Logging in...
                       </>
                     ) : (
-                      "Entrar"
+                      "Login"
                     )}
                   </Button>
                 </form>
@@ -153,13 +153,13 @@ export default function Login() {
               <TabsContent value="signup">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signup-name">Nome Completo</Label>
+                    <Label htmlFor="signup-name">Full Name</Label>
                     <div className="relative">
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signup-name"
                         type="text"
-                        placeholder="Seu nome"
+                        placeholder="Your name"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         className="pl-10"
@@ -175,7 +175,7 @@ export default function Login() {
                       <Input
                         id="signup-email"
                         type="email"
-                        placeholder="seu@email.com"
+                        placeholder="your@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="pl-10"
@@ -185,13 +185,13 @@ export default function Login() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="signup-password">Senha</Label>
+                    <Label htmlFor="signup-password">Password</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signup-password"
                         type="password"
-                        placeholder="Mínimo 6 caracteres"
+                        placeholder="Minimum 6 characters"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="pl-10"
@@ -205,10 +205,10 @@ export default function Login() {
                     {isLoading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Criando conta...
+                        Creating account...
                       </>
                     ) : (
-                      "Criar Conta"
+                      "Create Account"
                     )}
                   </Button>
                 </form>
