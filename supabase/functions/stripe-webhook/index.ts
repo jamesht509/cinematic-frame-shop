@@ -7,6 +7,16 @@ const logStep = (step: string, details?: any) => {
   console.log(`[STRIPE-WEBHOOK] ${step}${detailsStr}`);
 };
 
+// Generate a random password
+const generatePassword = (): string => {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%';
+  let password = '';
+  for (let i = 0; i < 12; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
+};
+
 serve(async (req) => {
   try {
     logStep("Webhook received");
@@ -65,6 +75,40 @@ serve(async (req) => {
         logStep("Product found", { productData });
       }
 
+      // Check if user already exists
+      let userId = null;
+      let generatedPassword = null;
+      let isNewUser = false;
+
+      if (customerEmail) {
+        const { data: existingUsers } = await supabaseClient.auth.admin.listUsers();
+        const existingUser = existingUsers?.users?.find(u => u.email === customerEmail);
+
+        if (existingUser) {
+          userId = existingUser.id;
+          logStep("Existing user found", { userId });
+        } else {
+          // Create new user account
+          generatedPassword = generatePassword();
+          const { data: newUser, error: createUserError } = await supabaseClient.auth.admin.createUser({
+            email: customerEmail,
+            password: generatedPassword,
+            email_confirm: true,
+            user_metadata: {
+              full_name: customerName || '',
+            },
+          });
+
+          if (createUserError) {
+            logStep("Error creating user", { error: createUserError });
+          } else {
+            userId = newUser.user?.id;
+            isNewUser = true;
+            logStep("New user created", { userId });
+          }
+        }
+      }
+
       // Create purchase record
       const { data: purchase, error: purchaseError } = await supabaseClient
         .from("purchases")
@@ -77,6 +121,7 @@ serve(async (req) => {
           status: "completed",
           stripe_session_id: session.id,
           stripe_payment_intent: typeof session.payment_intent === 'string' ? session.payment_intent : null,
+          user_id: userId,
         })
         .select()
         .single();
@@ -86,7 +131,7 @@ serve(async (req) => {
       } else {
         logStep("Purchase created", { purchaseId: purchase.id });
 
-        // Send confirmation email
+        // Send confirmation email with password if new user
         try {
           const emailResponse = await fetch(
             `${Deno.env.get("SUPABASE_URL")}/functions/v1/send-purchase-email`,
@@ -101,6 +146,8 @@ serve(async (req) => {
                 customerEmail,
                 customerName,
                 productData,
+                generatedPassword: isNewUser ? generatedPassword : null,
+                isNewUser,
               }),
             }
           );

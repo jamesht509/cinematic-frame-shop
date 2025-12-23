@@ -81,7 +81,7 @@ export default function MyPurchase() {
       setPurchases(data || []);
     } catch (error) {
       console.error("Error fetching purchases:", error);
-      toast.error("Erro ao carregar suas compras");
+      toast.error("Error loading your purchases");
     } finally {
       setIsLoading(false);
     }
@@ -89,7 +89,7 @@ export default function MyPurchase() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    toast.success("Logout realizado com sucesso");
+    toast.success("Logged out successfully");
     navigate("/");
   };
 
@@ -106,19 +106,19 @@ export default function MyPurchase() {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold">Minhas Compras</h1>
+            <h1 className="text-2xl font-bold">My Purchases</h1>
             <p className="text-muted-foreground">{user?.email}</p>
           </div>
           <div className="flex gap-2">
             <Button asChild variant="outline" size="sm">
               <Link to="/">
                 <Home className="h-4 w-4 mr-2" />
-                Loja
+                Store
               </Link>
             </Button>
             <Button variant="ghost" size="sm" onClick={handleLogout}>
               <LogOut className="h-4 w-4 mr-2" />
-              Sair
+              Logout
             </Button>
           </div>
         </div>
@@ -127,12 +127,12 @@ export default function MyPurchase() {
           <Card>
             <CardContent className="py-12 text-center">
               <Package className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Nenhuma compra encontrada</h3>
+              <h3 className="text-lg font-semibold mb-2">No purchases found</h3>
               <p className="text-muted-foreground mb-4">
-                Você ainda não fez nenhuma compra com este email.
+                You haven't made any purchases with this email yet.
               </p>
               <Button asChild>
-                <Link to="/">Ver Produtos</Link>
+                <Link to="/">View Products</Link>
               </Button>
             </CardContent>
           </Card>
@@ -145,16 +145,16 @@ export default function MyPurchase() {
                     <div className="w-full md:w-48 h-48 bg-muted">
                       <img
                         src={purchase.products.image_url}
-                        alt={purchase.products.name || "Produto"}
+                        alt={purchase.products.name || "Product"}
                         className="w-full h-full object-cover"
                       />
                     </div>
                   )}
                   <div className="flex-1 p-6">
                     <CardHeader className="p-0 mb-4">
-                      <CardTitle>{purchase.products?.name || "Produto"}</CardTitle>
+                      <CardTitle>{purchase.products?.name || "Product"}</CardTitle>
                       <CardDescription>
-                        Comprado em {new Date(purchase.purchased_at).toLocaleDateString("pt-BR")}
+                        Purchased on {new Date(purchase.purchased_at).toLocaleDateString("en-US")}
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="p-0">
@@ -163,7 +163,7 @@ export default function MyPurchase() {
                           <Button asChild size="sm" className="bg-green-600 hover:bg-green-700">
                             <a href={purchase.products.download_url} target="_blank" rel="noopener noreferrer">
                               <Download className="h-4 w-4 mr-2" />
-                              Baixar Arquivos
+                              Download Files
                             </a>
                           </Button>
                         )}
