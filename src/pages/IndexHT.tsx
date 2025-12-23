@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { useEffect } from 'react';
 import { LayoutHT } from '@/components/ht/LayoutHT';
-import { useCartStore } from '@/stores/cartStore';
-import { fetchProductByHandle } from '@/lib/shopify';
+import { createCheckoutSession } from '@/lib/stripe';
 import { toast } from 'sonner';
 import { ht } from '@/locales/ht/translations';
 import { trackAddToCart, trackViewContent } from '@/lib/metaPixel';
@@ -33,120 +31,53 @@ import { UrgencyBarHT } from '@/components/ht/UrgencyBarHT';
 import { SectionCTAHT } from '@/components/ht/SectionCTAHT';
 import { FinalCTAHT } from '@/components/ht/FinalCTAHT';
 
-// The main product handle - hardcoded for single-product store
-const MAIN_PRODUCT_HANDLE = 'cinematic-portrait-presets';
-
-interface ProductNode {
-  id: string;
-  title: string;
-  description: string;
-  handle: string;
-  priceRange: {
-    minVariantPrice: {
-      amount: string;
-      currencyCode: string;
-    };
-  };
-  images: {
-    edges: Array<{
-      node: {
-        url: string;
-        altText: string | null;
-      };
-    }>;
-  };
-  variants: {
-    edges: Array<{
-      node: {
-        id: string;
-        title: string;
-        price: {
-          amount: string;
-          currencyCode: string;
-        };
-        availableForSale: boolean;
-        selectedOptions: Array<{
-          name: string;
-          value: string;
-        }>;
-      };
-    }>;
-  };
-  options: Array<{
-    name: string;
-    values: string[];
-  }>;
-}
+// Product configuration - Stripe
+const PRODUCT_CONFIG = {
+  id: '2adad4d4-257a-4316-98ed-b0cb5fdcd46a',
+  title: 'Fine Art Backdrops Mega Pack',
+  price: '79',
+  currency: 'USD',
+  priceId: 'price_1ShOExDpQeuTAAl5kSbVJYE9',
+};
 
 const IndexHT = () => {
-  const [product, setProduct] = useState<ProductNode | null>(null);
-  const [loading, setLoading] = useState(true);
-  const addItem = useCartStore((state) => state.addItem);
-
+  // Track view on mount
   useEffect(() => {
-    async function loadProduct() {
-      try {
-        setLoading(true);
-        const data = await fetchProductByHandle(MAIN_PRODUCT_HANDLE);
-        setProduct(data);
-        
-        // Track ViewContent when product loads
-        if (data) {
-          trackViewContent(
-            data.title,
-            'Photography Backdrops',
-            parseFloat(data.priceRange.minVariantPrice.amount)
-          );
-        }
-      } catch (err) {
-        console.error('Failed to load product:', err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadProduct();
+    trackViewContent(
+      PRODUCT_CONFIG.title,
+      'Photography Backdrops',
+      parseFloat(PRODUCT_CONFIG.price)
+    );
   }, []);
 
-  const handleAddToCart = () => {
-    if (!product) return;
-    
-    const variant = product.variants.edges[0]?.node;
-    if (!variant) return;
+  const handleBuyNow = async () => {
+    try {
+      // Track AddToCart event
+      trackAddToCart(
+        [PRODUCT_CONFIG.id],
+        parseFloat(PRODUCT_CONFIG.price),
+        1
+      );
 
-    addItem({
-      product: { node: product },
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions,
-    });
-    
-    // Track AddToCart event
-    trackAddToCart(
-      [product.id],
-      parseFloat(variant.price.amount),
-      1
-    );
-    
-    toast.success(ht.toast.addedToCart, {
-      description: product.title,
-      position: 'top-center',
-    });
+      toast.loading('Redireksyon nan checkout...', { id: 'checkout' });
+
+      const checkoutUrl = await createCheckoutSession({
+        priceId: PRODUCT_CONFIG.priceId,
+        productId: PRODUCT_CONFIG.id,
+      });
+
+      // Open checkout in new tab
+      window.open(checkoutUrl, '_blank');
+      
+      toast.success('Checkout louvri!', { 
+        id: 'checkout',
+        position: 'top-center',
+      });
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast.error('Erè pandan kreyasyon checkout. Eseye ankò.', { id: 'checkout' });
+    }
   };
-
-  if (loading) {
-    return (
-      <LayoutHT>
-        <div className="min-h-screen flex items-center justify-center bg-charcoal-dark">
-          <Loader2 className="h-8 w-8 animate-spin text-gold" />
-        </div>
-      </LayoutHT>
-    );
-  }
-
-  const price = product?.priceRange.minVariantPrice.amount || '97';
-  const currency = product?.priceRange.minVariantPrice.currencyCode || 'USD';
 
   return (
     <LayoutHT>
@@ -160,10 +91,10 @@ const IndexHT = () => {
 
       {/* 1. Fullscreen Hero Slider */}
       <ProductHeroSliderHT
-        productTitle={product?.title || 'Fine Art Backdrops Mega Pack'}
-        productPrice={price}
-        currencyCode={currency}
-        onAddToCart={handleAddToCart}
+        productTitle={PRODUCT_CONFIG.title}
+        productPrice={PRODUCT_CONFIG.price}
+        currencyCode={PRODUCT_CONFIG.currency}
+        onAddToCart={handleBuyNow}
       />
 
       {/* 2. Free Bonuses */}
@@ -177,8 +108,8 @@ const IndexHT = () => {
         variant="highlight"
         heading={ht.cta.photoshopAction.heading}
         subheading={ht.cta.photoshopAction.subheading}
-        price={parseFloat(price).toFixed(0)}
-        onAddToCart={handleAddToCart}
+        price={PRODUCT_CONFIG.price}
+        onAddToCart={handleBuyNow}
       />
 
       {/* 4. Before & After Showcase */}
@@ -189,8 +120,8 @@ const IndexHT = () => {
         variant="default"
         heading={ht.cta.beforeAfter.heading}
         subheading={ht.cta.beforeAfter.subheading}
-        price={parseFloat(price).toFixed(0)}
-        onAddToCart={handleAddToCart}
+        price={PRODUCT_CONFIG.price}
+        onAddToCart={handleBuyNow}
       />
 
       {/* 5. Themed Gallery Sections */}
@@ -198,7 +129,7 @@ const IndexHT = () => {
       <NewbornGallery />
       
       {/* Mini CTA */}
-      <SectionCTAHT variant="minimal" price={parseFloat(price).toFixed(0)} onAddToCart={handleAddToCart} />
+      <SectionCTAHT variant="minimal" price={PRODUCT_CONFIG.price} onAddToCart={handleBuyNow} />
 
       <GraduationGallery />
       <BabyFantasyGallery />
@@ -210,15 +141,15 @@ const IndexHT = () => {
         variant="highlight"
         heading={ht.cta.galleries.heading}
         subheading={ht.cta.galleries.subheading}
-        price={parseFloat(price).toFixed(0)}
-        onAddToCart={handleAddToCart}
+        price={PRODUCT_CONFIG.price}
+        onAddToCart={handleBuyNow}
       />
 
       {/* 6. Video Tutorials */}
       <VideoTutorialsHT />
 
       {/* 7. What's Included */}
-      <WhatIsIncludedHT productTitle={product?.title || 'Fine Art Backdrops Mega Pack'} />
+      <WhatIsIncludedHT productTitle={PRODUCT_CONFIG.title} />
 
       {/* 8. How It Works */}
       <HowItWorksHT />
@@ -231,16 +162,16 @@ const IndexHT = () => {
 
       {/* 11. Final CTA - Last Chance */}
       <FinalCTAHT 
-        price={price}
-        currencyCode={currency}
-        onAddToCart={handleAddToCart}
+        price={PRODUCT_CONFIG.price}
+        currencyCode={PRODUCT_CONFIG.currency}
+        onAddToCart={handleBuyNow}
       />
 
       {/* Floating Buy Button */}
       <FloatingBuyButtonHT 
-        price={price}
-        currencyCode={currency}
-        onAddToCart={handleAddToCart}
+        price={PRODUCT_CONFIG.price}
+        currencyCode={PRODUCT_CONFIG.currency}
+        onAddToCart={handleBuyNow}
       />
     </LayoutHT>
   );

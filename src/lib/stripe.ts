@@ -3,8 +3,6 @@ import { supabase } from "@/integrations/supabase/client";
 export interface CheckoutParams {
   priceId: string;
   productId: string;
-  customerEmail: string;
-  customerName: string;
 }
 
 export async function createCheckoutSession(params: CheckoutParams): Promise<string> {
