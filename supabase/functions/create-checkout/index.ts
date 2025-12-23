@@ -31,7 +31,8 @@ serve(async (req) => {
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
 
-    const origin = req.headers.get("origin") || "https://lovable.dev";
+    // Always use the production domain for redirects
+    const origin = "https://jmpresets.com";
 
     // Create checkout session - embedded or redirect mode
     if (embedded) {
