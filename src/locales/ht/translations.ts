@@ -230,7 +230,13 @@ export const ht = {
       termsOfUse: "Tèm Itilizasyon",
       privacy: "Privacy"
     },
-    copyright: "© {year} JM Presets pa Jemson Bautista. Tout dwa rezève."
+  copyright: "© {year} JM Presets pa Jemson Bautista. Tout dwa rezève."
+  },
+
+  // Checkout Modal
+  checkout: {
+    close: "Fèmen",
+    loading: "Ap chaje checkout sekirize..."
   },
 
   // Toast messages

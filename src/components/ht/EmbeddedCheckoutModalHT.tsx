@@ -6,23 +6,24 @@ import {
 } from '@stripe/react-stripe-js';
 import { X, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { ht } from '@/locales/ht/translations';
 
 // Initialize Stripe with your publishable key
 const stripePromise = loadStripe('pk_live_51ShCjpDpQeuTAAl5UUjFW9MqAPMmMNL6WjhcDZsrJiQdAKr2VnbxiInPGsmE6FXfGk3jFifRY2B4k10W2rXGRMH900d5PUTClB');
 
-interface EmbeddedCheckoutModalProps {
+interface EmbeddedCheckoutModalHTProps {
   isOpen: boolean;
   onClose: () => void;
   priceId: string;
   productId: string;
 }
 
-export function EmbeddedCheckoutModal({ 
+export function EmbeddedCheckoutModalHT({ 
   isOpen, 
   onClose, 
   priceId, 
   productId 
-}: EmbeddedCheckoutModalProps) {
+}: EmbeddedCheckoutModalHTProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchClientSecret = useCallback(async () => {
@@ -65,7 +66,7 @@ export function EmbeddedCheckoutModal({
         <button
           onClick={onClose}
           className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
-          aria-label="Close"
+          aria-label={ht.checkout.close}
         >
           <X className="h-5 w-5 text-gray-600" />
         </button>
@@ -76,7 +77,7 @@ export function EmbeddedCheckoutModal({
             <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
               <div className="text-center">
                 <Loader2 className="h-10 w-10 animate-spin text-gold mx-auto mb-3" />
-                <p className="text-gray-600">Loading secure checkout...</p>
+                <p className="text-gray-600">{ht.checkout.loading}</p>
               </div>
             </div>
           )}
