@@ -69,8 +69,8 @@ export default function Success() {
       <div className="min-h-screen bg-gradient-to-br from-charcoal-dark via-charcoal to-charcoal-dark flex items-center justify-center p-4">
         <div className="text-center">
           <Loader2 className="h-12 w-12 animate-spin text-gold mx-auto mb-4" />
-          <p className="text-white/70">Confirmando seu pagamento...</p>
-          <p className="text-white/50 text-sm mt-2">Isso pode levar alguns segundos</p>
+          <p className="text-white/70">Confirming your payment...</p>
+          <p className="text-white/50 text-sm mt-2">This may take a few seconds</p>
         </div>
       </div>
     );
@@ -85,17 +85,17 @@ export default function Success() {
               <CheckCircle className="h-12 w-12 text-gold" />
             </div>
             <CardTitle className="text-2xl font-bold text-white">
-              Pagamento Confirmado! 🎉
+              Payment Confirmed! 🎉
             </CardTitle>
             <CardDescription className="text-base text-white/70">
-              Obrigado pela sua compra! Seus arquivos estão prontos.
+              Thank you for your purchase! Your files are ready.
             </CardDescription>
           </CardHeader>
 
           <CardContent className="space-y-4">
             {product?.name && (
               <div className="bg-gold/10 border border-gold/20 rounded-lg p-4 text-center">
-                <p className="text-sm text-white/60">Produto</p>
+                <p className="text-sm text-white/60">Product</p>
                 <p className="font-semibold text-lg text-white">{product.name}</p>
               </div>
             )}
@@ -105,7 +105,7 @@ export default function Success() {
               <Link to="/thank-you-pdf" className="block">
                 <Button className="w-full h-14 text-lg bg-gold hover:bg-gold-light text-charcoal-dark font-bold">
                   <FileText className="mr-2 h-5 w-5" />
-                  Acessar PDF com Links de Download
+                  Access PDF with Download Links
                 </Button>
               </Link>
 
@@ -113,7 +113,7 @@ export default function Success() {
                 <Button asChild variant="outline" className="w-full h-12 border-gold/30 text-gold hover:bg-gold/10">
                   <a href={product.download_url} target="_blank" rel="noopener noreferrer">
                     <Download className="mr-2 h-5 w-5" />
-                    Download Direto
+                    Direct Download
                   </a>
                 </Button>
               )}
@@ -122,7 +122,7 @@ export default function Success() {
                 <Button asChild variant="outline" className="w-full h-12 border-white/20 text-white hover:bg-white/10">
                   <a href={product.video_tutorial_url} target="_blank" rel="noopener noreferrer">
                     <Video className="mr-2 h-5 w-5" />
-                    Assistir Tutorial
+                    Watch Tutorial
                   </a>
                 </Button>
               )}
@@ -131,7 +131,7 @@ export default function Success() {
                 <Button asChild variant="outline" className="w-full h-12 border-green-500/30 text-green-400 hover:bg-green-500/10">
                   <a href={product.whatsapp_group_url} target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="mr-2 h-5 w-5" />
-                    Entrar no Grupo WhatsApp
+                    Join WhatsApp Group
                   </a>
                 </Button>
               )}
@@ -141,10 +141,10 @@ export default function Success() {
               <div className="flex items-start gap-3">
                 <Sparkles className="h-5 w-5 text-gold mt-0.5" />
                 <div>
-                  <h4 className="font-semibold text-white mb-1">📧 Verifique seu Email</h4>
+                  <h4 className="font-semibold text-white mb-1">📧 Check Your Email</h4>
                   <p className="text-sm text-white/70">
-                    Enviamos todos os links e instruções para o seu email. 
-                    Verifique também a pasta de spam.
+                    We sent all links and instructions to your email. 
+                    Also check your spam folder.
                   </p>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function Success() {
               <Button asChild variant="ghost" className="w-full text-white/60 hover:text-white hover:bg-white/10">
                 <Link to="/">
                   <Home className="mr-2 h-4 w-4" />
-                  Voltar para a Loja
+                  Back to Store
                 </Link>
               </Button>
             </div>

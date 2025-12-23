@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { ht } from '@/locales/ht/translations';
 import { trackAddToCart, trackViewContent } from '@/lib/metaPixel';
 import { SEOHead } from '@/components/SEOHead';
-import { EmbeddedCheckoutModal } from '@/components/checkout/EmbeddedCheckoutModal';
+import { EmbeddedCheckoutModalHT } from '@/components/ht/EmbeddedCheckoutModalHT';
 
 // Product sections - Kreyòl versions
 import { ProductHeroSliderHT } from '@/components/ht/ProductHeroSliderHT';
@@ -73,7 +73,7 @@ const IndexHT = () => {
       />
 
       {/* Embedded Checkout Modal */}
-      <EmbeddedCheckoutModal
+      <EmbeddedCheckoutModalHT
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
         priceId={PRODUCT_CONFIG.priceId}
