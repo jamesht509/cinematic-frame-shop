@@ -37,7 +37,8 @@ export default function MyPurchase() {
       }
 
       setUser(session.user);
-      await fetchPurchases(session.user.email);
+      // Query by user_id instead of email for security
+      await fetchPurchases(session.user.id);
     };
 
     checkAuth();
@@ -53,10 +54,11 @@ export default function MyPurchase() {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  const fetchPurchases = async (email: string | undefined) => {
-    if (!email) return;
+  const fetchPurchases = async (userId: string) => {
+    if (!userId) return;
 
     try {
+      // Query by user_id (matches RLS policy) instead of customer_email
       const { data, error } = await supabase
         .from("purchases")
         .select(`
@@ -73,7 +75,7 @@ export default function MyPurchase() {
             image_url
           )
         `)
-        .eq("customer_email", email)
+        .eq("user_id", userId)
         .eq("status", "completed")
         .order("purchased_at", { ascending: false });
 
