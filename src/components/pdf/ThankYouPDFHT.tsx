@@ -64,7 +64,7 @@ export function ThankYouPDFHT() {
   };
 
   return (
-    <div className="pdf-template bg-cream-50 min-h-[297mm] w-full max-w-[210mm] mx-auto p-10 print:p-8 font-sans text-charcoal-800">
+    <div className="pdf-template bg-cream-50 h-[500mm] w-full max-w-[210mm] mx-auto p-8 print:p-6 font-sans text-charcoal-800">
       {/* Header */}
       <header className="text-center mb-10 pb-8 border-b-2 border-gold">
         <div className="mb-4">

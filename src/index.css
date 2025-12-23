@@ -218,8 +218,8 @@
 /* Print Styles for PDF Template */
 @media print {
   @page {
-    size: A4;
-    margin: 15mm;
+    size: 210mm 500mm;
+    margin: 10mm;
   }
 
   body {
