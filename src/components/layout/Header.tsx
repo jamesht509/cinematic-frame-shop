@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { User, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCartStore, useCartTotalItems } from '@/stores/cartStore';
 import { cn } from '@/lib/utils';
 import logoImg from '@/assets/logo.png';
 
@@ -16,8 +15,6 @@ const navLinks = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const totalItems = useCartTotalItems();
-  const openCart = useCartStore((state) => state.openCart);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,19 +76,16 @@ export function Header() {
                 🇭🇹 HT
               </Link>
 
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-white hover:text-gold relative"
-                onClick={openCart}
-              >
-                <ShoppingBag className="h-5 w-5" />
-                {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-gold text-charcoal-dark text-xs font-bold flex items-center justify-center rounded-full">
-                    {totalItems}
-                  </span>
-                )}
-              </Button>
+              {/* My Account */}
+              <Link to="/minha-compra">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:text-gold"
+                >
+                  <User className="h-5 w-5" />
+                </Button>
+              </Link>
 
               {/* Mobile Menu Button */}
               <Button
@@ -119,6 +113,13 @@ export function Header() {
                   {link.label}
                 </button>
               ))}
+              <Link 
+                to="/minha-compra"
+                className="text-base font-medium text-white/80 hover:text-gold transition-colors py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                My Purchases
+              </Link>
             </nav>
           </div>
         )}

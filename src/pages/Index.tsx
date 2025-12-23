@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
-import { useCartStore } from '@/stores/cartStore';
-import { fetchProductByHandle } from '@/lib/shopify';
+import { createCheckoutSession } from '@/lib/stripe';
 import { toast } from 'sonner';
 import { trackAddToCart, trackViewContent } from '@/lib/metaPixel';
 import { SEOHead } from '@/components/SEOHead';
@@ -30,120 +29,71 @@ import { UrgencyBar } from '@/components/conversion/UrgencyBar';
 import { SectionCTA } from '@/components/conversion/SectionCTA';
 import { FinalCTA } from '@/components/conversion/FinalCTA';
 
-// The main product handle - hardcoded for single-product store
-const MAIN_PRODUCT_HANDLE = 'cinematic-portrait-presets';
-
-interface ProductNode {
-  id: string;
-  title: string;
-  description: string;
-  handle: string;
-  priceRange: {
-    minVariantPrice: {
-      amount: string;
-      currencyCode: string;
-    };
-  };
-  images: {
-    edges: Array<{
-      node: {
-        url: string;
-        altText: string | null;
-      };
-    }>;
-  };
-  variants: {
-    edges: Array<{
-      node: {
-        id: string;
-        title: string;
-        price: {
-          amount: string;
-          currencyCode: string;
-        };
-        availableForSale: boolean;
-        selectedOptions: Array<{
-          name: string;
-          value: string;
-        }>;
-      };
-    }>;
-  };
-  options: Array<{
-    name: string;
-    values: string[];
-  }>;
-}
+// Product configuration - Stripe
+const PRODUCT_CONFIG = {
+  id: '2adad4d4-257a-4316-98ed-b0cb5fdcd46a',
+  title: 'Fine Art Backdrops Mega Pack',
+  price: '79',
+  currency: 'USD',
+  priceId: 'price_1ShOExDpQeuTAAl5kSbVJYE9',
+};
 
 const Index = () => {
-  const [product, setProduct] = useState<ProductNode | null>(null);
-  const [loading, setLoading] = useState(true);
-  const addItem = useCartStore((state) => state.addItem);
+  const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
+  const [checkoutEmail, setCheckoutEmail] = useState('');
+  const [checkoutName, setCheckoutName] = useState('');
+  const [showEmailModal, setShowEmailModal] = useState(false);
 
-  useEffect(() => {
-    async function loadProduct() {
-      try {
-        setLoading(true);
-        const data = await fetchProductByHandle(MAIN_PRODUCT_HANDLE);
-        setProduct(data);
-        
-        // Track ViewContent when product loads
-        if (data) {
-          trackViewContent(
-            data.title,
-            'Photography Backdrops',
-            parseFloat(data.priceRange.minVariantPrice.amount)
-          );
-        }
-      } catch (err) {
-        console.error('Failed to load product:', err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadProduct();
-  }, []);
-
-  const handleAddToCart = () => {
-    if (!product) return;
-    
-    const variant = product.variants.edges[0]?.node;
-    if (!variant) return;
-
-    addItem({
-      product: { node: product },
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions,
-    });
-    
-    // Track AddToCart event
-    trackAddToCart(
-      [product.id],
-      parseFloat(variant.price.amount),
-      1
+  // Track view on mount
+  useState(() => {
+    trackViewContent(
+      PRODUCT_CONFIG.title,
+      'Photography Backdrops',
+      parseFloat(PRODUCT_CONFIG.price)
     );
-    
-    toast.success('Added to cart!', {
-      description: product.title,
-      position: 'top-center',
-    });
+  });
+
+  const handleBuyNow = () => {
+    setShowEmailModal(true);
   };
 
-  if (loading) {
-    return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center bg-charcoal-dark">
-          <Loader2 className="h-8 w-8 animate-spin text-gold" />
-        </div>
-      </Layout>
-    );
-  }
+  const handleCheckout = async () => {
+    if (!checkoutEmail) {
+      toast.error('Por favor, insira seu email');
+      return;
+    }
 
-  const price = product?.priceRange.minVariantPrice.amount || '97';
-  const currency = product?.priceRange.minVariantPrice.currencyCode || 'USD';
+    setIsCheckoutLoading(true);
+    
+    try {
+      // Track AddToCart event
+      trackAddToCart(
+        [PRODUCT_CONFIG.id],
+        parseFloat(PRODUCT_CONFIG.price),
+        1
+      );
+
+      const checkoutUrl = await createCheckoutSession({
+        priceId: PRODUCT_CONFIG.priceId,
+        productId: PRODUCT_CONFIG.id,
+        customerEmail: checkoutEmail,
+        customerName: checkoutName,
+      });
+
+      // Open checkout in new tab
+      window.open(checkoutUrl, '_blank');
+      setShowEmailModal(false);
+      
+      toast.success('Redirecionando para o checkout...', {
+        position: 'top-center',
+      });
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast.error('Erro ao criar checkout. Tente novamente.');
+    } finally {
+      setIsCheckoutLoading(false);
+    }
+  };
 
   return (
     <Layout>
@@ -152,15 +102,81 @@ const Index = () => {
         description="Professional digital backgrounds & Photoshop actions for photographers. Transform your photos with stunning backdrops."
         lang="en"
       />
+      
+      {/* Email Modal */}
+      {showEmailModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+          <div className="bg-background rounded-2xl p-6 max-w-md w-full shadow-2xl">
+            <h3 className="text-2xl font-bold mb-2">Complete Your Purchase</h3>
+            <p className="text-muted-foreground mb-6">
+              Enter your email to receive your download link
+            </p>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">Name</label>
+                <input
+                  type="text"
+                  value={checkoutName}
+                  onChange={(e) => setCheckoutName(e.target.value)}
+                  placeholder="Your name"
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium mb-2">Email *</label>
+                <input
+                  type="email"
+                  value={checkoutEmail}
+                  onChange={(e) => setCheckoutEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+                />
+              </div>
+              
+              <button
+                onClick={handleCheckout}
+                disabled={isCheckoutLoading}
+                className="w-full bg-gold hover:bg-gold-light text-charcoal-dark font-bold py-4 rounded-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                {isCheckoutLoading ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    Proceed to Checkout - ${PRODUCT_CONFIG.price}
+                  </>
+                )}
+              </button>
+              
+              <button
+                onClick={() => setShowEmailModal(false)}
+                className="w-full text-muted-foreground hover:text-foreground py-2 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+            
+            <p className="text-xs text-muted-foreground mt-4 text-center">
+              🔒 Secure checkout powered by Stripe
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Urgency Bar at Top */}
       <UrgencyBar />
 
       {/* 1. Fullscreen Hero Slider */}
       <ProductHeroSlider
-        productTitle={product?.title || 'Fine Art Backdrops Mega Pack'}
-        productPrice={price}
-        currencyCode={currency}
-        onAddToCart={handleAddToCart}
+        productTitle={PRODUCT_CONFIG.title}
+        productPrice={PRODUCT_CONFIG.price}
+        currencyCode={PRODUCT_CONFIG.currency}
+        onAddToCart={handleBuyNow}
       />
 
       {/* 2. Free Bonuses */}
@@ -174,8 +190,8 @@ const Index = () => {
         variant="highlight"
         heading="Get the Photoshop Action FREE!"
         subheading="Included with your purchase - a $97 value"
-        price={parseFloat(price).toFixed(0)}
-        onAddToCart={handleAddToCart}
+        price={PRODUCT_CONFIG.price}
+        onAddToCart={handleBuyNow}
       />
 
       {/* 4. Before & After Showcase */}
@@ -186,8 +202,8 @@ const Index = () => {
         variant="default"
         heading="See the Magic? Get Yours Now!"
         subheading="Join 2000+ photographers creating stunning images"
-        price={parseFloat(price).toFixed(0)}
-        onAddToCart={handleAddToCart}
+        price={PRODUCT_CONFIG.price}
+        onAddToCart={handleBuyNow}
       />
 
       {/* 5. Themed Gallery Sections */}
@@ -195,7 +211,7 @@ const Index = () => {
       <NewbornGallery />
       
       {/* Mini CTA */}
-      <SectionCTA variant="minimal" price={parseFloat(price).toFixed(0)} onAddToCart={handleAddToCart} />
+      <SectionCTA variant="minimal" price={PRODUCT_CONFIG.price} onAddToCart={handleBuyNow} />
 
       <GraduationGallery />
       <BabyFantasyGallery />
@@ -207,15 +223,15 @@ const Index = () => {
         variant="highlight"
         heading="All These Categories Included!"
         subheading="2000+ backdrops across maternity, newborn, graduation, holidays & more"
-        price={parseFloat(price).toFixed(0)}
-        onAddToCart={handleAddToCart}
+        price={PRODUCT_CONFIG.price}
+        onAddToCart={handleBuyNow}
       />
 
       {/* 6. Video Tutorials */}
       <VideoTutorials />
 
       {/* 7. What's Included */}
-      <WhatIsIncluded productTitle={product?.title || 'Fine Art Backdrops Mega Pack'} />
+      <WhatIsIncluded productTitle={PRODUCT_CONFIG.title} />
 
       {/* 8. How It Works */}
       <HowItWorks />
@@ -228,16 +244,16 @@ const Index = () => {
 
       {/* 11. Final CTA - Last Chance */}
       <FinalCTA 
-        price={price}
-        currencyCode={currency}
-        onAddToCart={handleAddToCart}
+        price={PRODUCT_CONFIG.price}
+        currencyCode={PRODUCT_CONFIG.currency}
+        onAddToCart={handleBuyNow}
       />
 
       {/* Floating Buy Button */}
       <FloatingBuyButton 
-        price={price}
-        currencyCode={currency}
-        onAddToCart={handleAddToCart}
+        price={PRODUCT_CONFIG.price}
+        currencyCode={PRODUCT_CONFIG.currency}
+        onAddToCart={handleBuyNow}
       />
     </Layout>
   );
