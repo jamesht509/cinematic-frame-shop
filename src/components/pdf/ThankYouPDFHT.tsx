@@ -101,19 +101,13 @@ export function ThankYouPDFHT() {
           href={data.downloadLink.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-4 p-5 bg-charcoal-900 text-cream-50 rounded-sm hover:bg-charcoal-800 transition-colors print:bg-white print:text-charcoal-900 print:border-2 print:border-gold"
+          className="flex items-center justify-center gap-4 p-6 bg-charcoal-900 text-cream-50 rounded-lg hover:bg-charcoal-800 transition-colors print:bg-charcoal-900 print:text-cream-50"
         >
-          <Download size={24} className="text-gold flex-shrink-0" />
-          <div className="flex-1">
-            <span className="font-bold text-lg block">{data.downloadLink.label}</span>
-            <span className="text-sm text-charcoal-400 print:text-charcoal-600 break-all">
-              {data.downloadLink.url}
-            </span>
-          </div>
+          <Download size={28} className="text-gold flex-shrink-0" />
+          <span className="font-bold text-xl uppercase tracking-wide">
+            📥 Klike Isit pou Download Tout File yo
+          </span>
         </a>
-        <p className="mt-3 text-sm text-charcoal-600 italic">
-          💡 Tip: Si link lan pa fonksyone, copy/paste li nan browser w
-        </p>
       </PDFSection>
 
       {/* Video Tutorial */}
@@ -122,18 +116,15 @@ export function ThankYouPDFHT() {
           href={data.videoTutorial.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-4 p-4 border-2 border-gold rounded-sm hover:bg-gold/10 transition-all"
+          className="flex items-center justify-center gap-4 p-5 bg-red-deep text-cream-50 rounded-lg hover:bg-red-700 transition-all"
         >
-          <div className="w-14 h-14 bg-red-deep rounded-sm flex items-center justify-center flex-shrink-0">
-            <PlayCircle size={28} className="text-cream-50" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-bold text-charcoal-800 text-base">{data.videoTutorial.title}</p>
-            <p className="text-sm text-charcoal-500 break-all">{data.videoTutorial.url}</p>
-          </div>
+          <PlayCircle size={28} className="flex-shrink-0" />
+          <span className="font-bold text-lg uppercase tracking-wide">
+            🎬 Klike Isit pou Gade Tutorial la
+          </span>
         </a>
-        <p className="mt-3 text-sm text-charcoal-600">
-          🎥 Gade video sa a anvan w kòmanse - lap montre w tout bagay etap pa etap!
+        <p className="mt-3 text-sm text-charcoal-600 text-center">
+          Gade video sa a anvan w kòmanse - lap montre w tout bagay etap pa etap!
         </p>
       </PDFSection>
 
@@ -156,14 +147,11 @@ export function ThankYouPDFHT() {
           href={data.whatsappGroup}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-3 p-4 bg-green-500 text-white rounded-sm hover:bg-green-600 transition-colors font-bold text-center justify-center"
+          className="flex items-center gap-3 p-5 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-bold text-center justify-center text-lg uppercase tracking-wide"
         >
-          <MessageCircle size={20} />
-          <span>Klike Isit pou Antre nan Group la</span>
+          <MessageCircle size={24} />
+          <span>👆 Klike Isit pou Antre nan Group la GRATIS!</span>
         </a>
-        <p className="mt-3 text-xs text-charcoal-600 text-center break-all">
-          {data.whatsappGroup}
-        </p>
       </section>
 
       {/* How to Use */}
