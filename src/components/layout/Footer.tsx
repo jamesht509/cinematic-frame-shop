@@ -1,4 +1,4 @@
-import { Instagram, Youtube, Mail } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 
 import logoImg from '@/assets/logo.png';
 
@@ -78,26 +78,12 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="https://instagram.com/jemsonbautista"
+              href="https://instagram.com/jemsonmarius"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/40 hover:text-gold transition-colors"
             >
               <Instagram className="h-5 w-5" />
-            </a>
-            <a
-              href="https://youtube.com/@jemsonbautista"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/40 hover:text-gold transition-colors"
-            >
-              <Youtube className="h-5 w-5" />
-            </a>
-            <a
-              href="mailto:contato@jmpresets.com"
-              className="text-white/40 hover:text-gold transition-colors"
-            >
-              <Mail className="h-5 w-5" />
             </a>
           </div>
         </div>
