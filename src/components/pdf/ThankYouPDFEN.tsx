@@ -36,7 +36,7 @@ export function ThankYouPDFEN() {
     },
     videoTutorial: {
       title: '🎬 English Tutorial - Learn how to use the backdrops',
-      url: 'https://youtu.be/ENGLISH_VIDEO_ID' // TODO: Update with actual English video URL
+      url: 'https://iframe.mediadelivery.net/play/574167/510843de-3227-4448-bcd1-ecacb786661b' // TODO: Update with actual English video URL
     },
     instructions: [
       'Download the .zip file from the link above',
