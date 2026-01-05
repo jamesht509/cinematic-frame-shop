@@ -7,11 +7,11 @@ import { MetaPixelProvider } from "@/components/MetaPixelProvider";
 import Index from "./pages/Index";
 import IndexHT from "./pages/IndexHT";
 import ThankYouPDFPage from "./pages/ThankYouPDFPage";
+import ThankYouPDFPageEN from "./pages/ThankYouPDFPageEN";
 import Login from "./pages/Login";
 import Success from "./pages/Success";
 import MyPurchase from "./pages/MyPurchase";
 import NotFound from "./pages/NotFound";
-
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -25,6 +25,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/ht" element={<IndexHT />} />
             <Route path="/thank-you-pdf" element={<ThankYouPDFPage />} />
+            <Route path="/thank-you-pdf-en" element={<ThankYouPDFPageEN />} />
             <Route path="/login" element={<Login />} />
             <Route path="/sucesso" element={<Success />} />
             <Route path="/minha-compra" element={<MyPurchase />} />
